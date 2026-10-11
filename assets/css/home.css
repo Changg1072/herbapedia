@@ -1,0 +1,111 @@
+/* CSS riêng cho trang chủ (Home) */
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 3rem;
+}
+
+.scanner-container {
+    background: var(--glass-bg); /* Frosted Glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid var(--glass-border);
+}
+
+.camera-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: rgba(255, 255, 255, 0.2); /* Frosted inside */
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--lemon-yellow); /* Glowing lemon yellow border */
+    box-shadow: 0 0 15px rgba(250, 250, 51, 0.3); /* Glow effect */
+    border-radius: 20px; /* Soft rounded corners */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-frame .placeholder-icon {
+    font-size: 4rem;
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.camera-frame p {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+#videoElement, #imagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Hiệu ứng tia quét AI */
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--lemon-yellow);
+    box-shadow: 0 0 15px 5px rgba(250, 250, 51, 0.6);
+    animation: scan 2.5s ease-in-out infinite; /* Mượt mà hơn */
+    z-index: 10;
+}
+
+@keyframes scan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.loading-status {
+    margin-top: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-green);
+    font-size: 1.1rem;
+}

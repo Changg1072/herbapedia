@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Từ điển Dược liệu - HerbaPedia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .tag-pill { @apply bg-white border border-gray-200 px-5 py-2 rounded-full cursor-pointer font-semibold text-sm transition-all text-gray-600 shadow-sm whitespace-nowrap; }
+            .tag-pill:hover { @apply  border-gray-300; }
+            .tag-pill.active { @apply bg-[#0A2F1D] border-[#0A2F1D] text-white shadow-md; }
+            
+            .hide-scrollbar::-webkit-scrollbar { display: none; }
+            .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        }
+    </style>
+</head>
+<body class=" font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/80 border-b border-gray-100 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-[#0A2F1D] cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-[#8CC63F]">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Trang chủ</a></li>
+                <li><a href="search.html" class="text-[#0A2F1D] transition-colors pb-1 border-b-2 border-[#8CC63F]">Tra cứu</a></li>
+                <li><a href="history.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Cộng đồng</a></li>
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-7xl mx-auto px-6 flex-1 flex flex-col mt-10 mb-16">
+        
+        <!-- Khu vực 1: Search & Filters -->
+        <div class="w-full flex flex-col items-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-[#0A2F1D] mb-8 font-serif">Từ điển Lá thuốc</h1>
+            
+            <!-- Search Bar -->
+            <div class="relative w-full max-w-3xl mb-6 group">
+                <i data-feather="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-[#8CC63F] transition-colors"></i>
+                <input type="text" id="searchInput" placeholder="Nhập tên lá cây, tên khoa học hoặc tiếng Anh..." 
+                       class="w-full pl-14 pr-6 py-4 rounded-full border border-gray-200 bg-white text-gray-700 outline-none focus:border-[#8CC63F] focus:ring-4 focus:ring-[#8CC63F]/10 shadow-sm transition-all text-lg placeholder-gray-400">
+            </div>
+            
+            <!-- Filter Tags (Scrollable) -->
+            <div class="w-full max-w-4xl overflow-x-auto hide-scrollbar py-2">
+                <div class="flex items-center justify-center sm:justify-start md:justify-center gap-3 w-max mx-auto px-4">
+                    <button class="tag-pill active">Tất cả</button>
+                    <button class="tag-pill">Thanh nhiệt</button>
+                    <button class="tag-pill">Giải độc</button>
+                    <button class="tag-pill">Kháng viêm</button>
+                    <button class="tag-pill">An thần</button>
+                    <button class="tag-pill">Tiêu hóa</button>
+                    <button class="tag-pill">Cầm máu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Khu vực 2: Kết quả (Grid List) -->
+        <div id="resultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Card 1 -->            <a href="detail.html?name=tiato" data-tags="thanh nhiệt, giải độc" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <div class="h-48 w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=500&h=300&fit=crop" alt="Tía tô" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-lg font-bold text-[#0A2F1D] leading-tight">Tía tô</h3>
+                    <p class="text-sm italic text-gray-500 mb-3">Perilla frutescens (L.) Britton</p>
+                    <p class="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+                        Lá tía tô có vị cay, tính ấm, tác dụng phát tán phong hàn, giải biểu, lý khí. Thường dùng chữa cảm mạo phong hàn, nhức đầu.
+                    </p>
+                    <div class="mt-4 flex justify-end">
+                        <span class="text-[#8CC63F] font-medium text-sm flex items-center gap-1 group-hover:underline">
+                            Xem chi tiết <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2 -->            <a href="detail.html?name=tamsen" data-tags="thanh nhiệt, an thần" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <div class="h-48 w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?w=500&h=300&fit=crop" alt="Tâm sen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-lg font-bold text-[#0A2F1D] leading-tight">Tâm sen</h3>
+                    <p class="text-sm italic text-gray-500 mb-3">Nelumbo nucifera Gaertn</p>
+                    <p class="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+                        Chồi mầm bên trong hạt sen, có vị đắng tính hàn. Chủ trị chứng mất ngủ, tâm phiền, giải nhiệt và làm dịu thần kinh.
+                    </p>
+                    <div class="mt-4 flex justify-end">
+                        <span class="text-[#8CC63F] font-medium text-sm flex items-center gap-1 group-hover:underline">
+                            Xem chi tiết <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Card 3 -->            <a href="detail.html?name=lactien" data-tags="an thần, thanh nhiệt, giải độc" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <div class="h-48 w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1463123081488-789f998ac9c4?w=500&h=300&fit=crop" alt="Lạc tiên" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-lg font-bold text-[#0A2F1D] leading-tight">Lạc tiên</h3>
+                    <p class="text-sm italic text-gray-500 mb-3">Passiflora foetida L.</p>
+                    <p class="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+                        Cây thân leo, mọc hoang. Bộ phận dùng chủ yếu là lá và ngọn non. Công dụng chính là an thần, thanh nhiệt, giải độc gan.
+                    </p>
+                    <div class="mt-4 flex justify-end">
+                        <span class="text-[#8CC63F] font-medium text-sm flex items-center gap-1 group-hover:underline">
+                            Xem chi tiết <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 4 -->            <a href="detail.html?name=diephachau" data-tags="thanh nhiệt, giải độc, tiêu hóa" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                <div class="h-48 w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&h=300&fit=crop" alt="Diệp hạ châu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-lg font-bold text-[#0A2F1D] leading-tight">Diệp hạ châu (Chó đẻ)</h3>
+                    <p class="text-sm italic text-gray-500 mb-3">Phyllanthus urinaria L.</p>
+                    <p class="text-gray-600 line-clamp-2 text-sm leading-relaxed">
+                        Thường gọi là cây Chó đẻ răng cưa. Có tác dụng bảo vệ gan, thanh nhiệt giải độc, thường dùng hỗ trợ điều trị viêm gan.
+                    </p>
+                    <div class="mt-4 flex justify-end">
+                        <span class="text-[#8CC63F] font-medium text-sm flex items-center gap-1 group-hover:underline">
+                            Xem chi tiết <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+        <!-- Khu vực 3: Phân trang (Pagination) -->
+        <div class="w-full flex justify-center items-center gap-2 mt-12">
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:text-[#0A2F1D] hover: transition-colors" disabled>
+                <i data-feather="chevron-left" class="w-5 h-5"></i>
+            </button>
+            
+            <button class="w-10 h-10 flex items-center justify-center rounded-full bg-[#0A2F1D] text-white font-bold shadow-md">1</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:border-[#8CC63F] hover:text-[#8CC63F] transition-colors">2</button>
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:border-[#8CC63F] hover:text-[#8CC63F] transition-colors">3</button>
+            
+            <span class="text-gray-400 mx-1">...</span>
+            
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:border-[#8CC63F] hover:text-[#8CC63F] transition-colors">12</button>
+            
+            <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:text-[#0A2F1D] hover: transition-colors">
+                <i data-feather="chevron-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-gray-500 text-sm font-medium mt-auto">
+        <p>&copy; 2026 HerbaPedia. Phát triển vì sức khỏe cộng đồng.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+        <script>
+        feather.replace();
+
+        // JS logic for Filtering by Tags
+        const tags = document.querySelectorAll('.tag-pill');
+        const cards = document.querySelectorAll('#resultsGrid a');
+
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Remove active class from all tags
+                tags.forEach(t => t.classList.remove('active', 'bg-[#0A2F1D]', 'border-[#0A2F1D]', 'text-white', 'shadow-md'));
+                tags.forEach(t => t.classList.add('bg-white', 'text-gray-600'));
+                
+                // Add active class to clicked tag
+                tag.classList.remove('bg-white', 'text-gray-600');
+                tag.classList.add('active', 'bg-[#0A2F1D]', 'border-[#0A2F1D]', 'text-white', 'shadow-md');
+
+                const filterText = tag.innerText.toLowerCase().trim();
+
+                // Show/hide cards based on data-tags
+                cards.forEach(card => {
+                    if (filterText === 'tất cả') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardTags = card.getAttribute('data-tags') || '';
+                        if (cardTags.includes(filterText)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    
+        // JS logic for Smart Search
+        const searchInput = document.getElementById('searchInput');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').innerText.toLowerCase();
+                    const scienceName = card.querySelector('.italic.text-gray-500').innerText.toLowerCase();
+                    const desc = card.querySelector('.line-clamp-2').innerText.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || scienceName.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Nếu có kết hợp với tag filter, ta nên cẩn thận.
+                // Ở mức độ cơ bản nhất, ưu tiên kết quả tìm kiếm text.
+                // Nếu search box trống, ta kích hoạt lại logic filter tag hiện tại.
+                if (searchTerm === '') {
+                    const activeTag = document.querySelector('.tag-pill.active');
+                    if(activeTag) {
+                        activeTag.click(); // Trigger lại logic lọc tag
+                    }
+                } else {
+                    // Khi đang gõ tìm kiếm, ta gỡ active của các tag đi để tránh conflict UX
+                    document.querySelectorAll('.tag-pill').forEach(t => {
+                        t.classList.remove('active', 'bg-[#0A2F1D]', 'border-[#0A2F1D]', 'text-white', 'shadow-md');
+                        t.classList.add('bg-white', 'text-gray-600');
+                    });
+                }
+            });
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cộng đồng - HerbaPedia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+    </style>
+</head>
+<body class=" font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/60 border-b border-gray-100 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-[#0A2F1D] cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-[#8CC63F]">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Trang chủ</a></li>
+                <li><a href="search.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Tra cứu</a></li>
+                <li><a href="history.html" class="text-[#0A2F1D] transition-colors pb-1 border-b-2 border-yellow-400">Cộng đồng</a></li>
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="max-w-[680px] mx-auto w-full px-4 py-8 z-10 flex-1">
+        
+        <!-- Post Creator Trigger Box -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-[#8CC63F] text-white flex items-center justify-center font-bold text-sm shrink-0">US</div>
+                <button id="btnOpenPostModal" class="flex-1 bg-gray-50 hover:bg-gray-100 text-left text-gray-500 px-4 py-2.5 rounded-full transition-colors text-sm border border-transparent">
+                    Bạn có bài thuốc hay muốn chia sẻ?
+                </button>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-gray-50">
+                <button class="flex items-center gap-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
+                    <i data-feather="image" class="w-5 h-5 text-gray-400"></i> Hình ảnh
+                </button>
+                <button class="flex items-center gap-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg text-sm font-semibold transition-colors">
+                    <i data-feather="book-open" class="w-5 h-5 text-gray-400"></i> Công thức
+                </button>
+            </div>
+        </div>
+
+        <!-- Feed Tabs -->
+        
+
+        <!-- Feed Items -->
+        
+              <!-- Bài viết 1 -->
+              <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                          <img src="https://ui-avatars.com/api/?name=N+M&background=0A2F1D&color=fff" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity" data-author="Nguyễn Thị Mai" data-avatar="https://ui-avatars.com/api/?name=N+M&background=0A2F1D&color=fff">
+                          <div>
+                              <h4 class="font-bold text-[#0A2F1D] text-sm cursor-pointer hover:underline">Nguyễn Thị Mai</h4>
+                              <span class="text-xs text-gray-400">1 giờ trước</span>
+                          </div>
+                      </div>
+                                            
+                      </div>
+                  </div>
+                  
+                  <h3 class="font-bold text-lg mb-2 text-gray-900">Hỏi về cách dùng cây Lược Vàng chữa viêm loét dạ dày</h3>
+                  <p class="text-gray-800 text-sm mb-3">Chào mọi người, mình nghe nói cây Lược Vàng ngâm rượu có thể chữa được bệnh viêm loét dạ dày. Không biết có anh chị nào trong nhóm đã từng áp dụng và có hiệu quả chưa ạ? Mong được chia sẻ kinh nghiệm thực tế. Xin cảm ơn!</p>
+                  
+                  <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                      <div class="flex gap-2">
+                          <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="heart" class="w-4 h-4"></i> 12</button>
+                          <button class="open-comment-btn flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]" data-author="Nguyễn Thị Mai"><i data-feather="message-circle" class="w-4 h-4"></i> 5</button>
+                      </div>
+                      <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="share-2" class="w-4 h-4"></i> Chia sẻ</button>
+                  </div>
+              </div>
+
+              <!-- Bài viết 2 -->
+              <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                          <img src="https://ui-avatars.com/api/?name=B+S&background=8CC63F&color=fff" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity" data-author="Bác sĩ Trần Hữu Hùng" data-avatar="https://ui-avatars.com/api/?name=B+S&background=8CC63F&color=fff">
+                          <div>
+                              <h4 class="font-bold text-[#0A2F1D] text-sm cursor-pointer hover:underline flex items-center gap-1">Bác sĩ Trần Hữu Hùng <i data-feather="check-circle" class="w-3 h-3 text-[#8CC63F]"></i></h4>
+                              <span class="text-xs text-gray-400">3 giờ trước</span>
+                          </div>
+                      </div>
+                                            
+                      </div>
+                  </div>
+                  
+                  <h3 class="font-bold text-lg mb-2 text-gray-900">[Kiến thức] Tác dụng phụ không mong muốn của Nhân Sâm</h3>
+                  <p class="text-gray-800 text-sm mb-3">Rất nhiều người nghĩ Nhân Sâm là thần dược, dùng càng nhiều càng tốt. Tuy nhiên, nếu dùng sai cách hoặc quá liều có thể gây ra tăng huyết áp, mất ngủ, chảy máu cam. Đặc biệt người đang bị cảm mạo, sốt cao tuyệt đối không được dùng. Mọi người lưu ý nhé.</p>
+                  
+                  <img src="https://images.unsplash.com/photo-1599839619722-39751411ea63?w=600&h=400&fit=crop" class="w-full h-56 object-cover rounded-xl mb-3 border border-gray-100 cursor-pointer hover:opacity-95 transition-opacity">
+                  
+                  <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                      <div class="flex gap-2">
+                          <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="heart" class="w-4 h-4"></i> 145</button>
+                          <button class="open-comment-btn flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]" data-author="Bác sĩ Trần Hữu Hùng"><i data-feather="message-circle" class="w-4 h-4"></i> 28</button>
+                      </div>
+                      <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="share-2" class="w-4 h-4"></i> Chia sẻ</button>
+                  </div>
+              </div>
+
+              <!-- Bài viết 3 -->
+              <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center gap-3">
+                          <img src="https://ui-avatars.com/api/?name=L+K&background=0A2F1D&color=fff" class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity" data-author="Lê Văn Khang" data-avatar="https://ui-avatars.com/api/?name=L+K&background=0A2F1D&color=fff">
+                          <div>
+                              <h4 class="font-bold text-[#0A2F1D] text-sm cursor-pointer hover:underline">Lê Văn Khang</h4>
+                              <span class="text-xs text-gray-400">Hôm qua lúc 15:30</span>
+                          </div>
+                      </div>
+                                            
+                      </div>
+                  </div>
+                  
+                  <h3 class="font-bold text-lg mb-2 text-gray-900">Trải nghiệm thực tế tự trồng Cà Gai Leo tại nhà</h3>
+                  <p class="text-gray-800 text-sm mb-3 line-clamp-3">Sau 3 tháng chăm sóc, hôm nay mình đã thu hoạch lứa Cà Gai Leo đầu tiên trồng trên sân thượng. Ban đầu cứ sợ chết vì nắng gắt nhưng hóa ra cây này rất dễ sống và ít sâu bệnh. Nấu nước uống giải độc gan cực kỳ tốt cho những ai hay phải uống bia rượu nhé các bác.</p>
+                  
+                  <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=600&h=400&fit=crop" class="w-full h-56 object-cover rounded-xl mb-3 border border-gray-100 cursor-pointer hover:opacity-95 transition-opacity">
+                  
+                  <div class="flex items-center justify-between pt-2 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                      <div class="flex gap-2">
+                          <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="heart" class="w-4 h-4"></i> 89</button>
+                          <button class="open-comment-btn flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]" data-author="Lê Văn Khang"><i data-feather="message-circle" class="w-4 h-4"></i> 14</button>
+                      </div>
+                      <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="share-2" class="w-4 h-4"></i> Chia sẻ</button>
+                  </div>
+              </div>
+<div id="feedRecipe" class="hidden flex-col gap-6"><!-- Sample Post 2 (Remedy Feed Item) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+                
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=V+A&background=8CC63F&color=fff" class="w-10 h-10 rounded-full author-link cursor-pointer hover:opacity-80 transition-opacity" data-author="Lương y Vũ Anh" data-avatar="https://ui-avatars.com/api/?name=V+A&background=8CC63F&color=fff">
+                        <div>
+                            <h4 class="font-bold text-[#0A2F1D] text-sm hover:underline cursor-pointer">Lương y Vũ Anh</h4>
+                            <span class="text-xs text-gray-400">5 giờ trước</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                            <i data-feather="check-circle" class="w-3 h-3"></i> Đã kiểm duyệt
+                        </span>
+                                              
+                      </div>
+                    </div>
+                </div>
+                
+                <!-- Title -->
+                <h3 class="font-bold text-xl mb-3 text-gray-900 leading-tight">Bài thuốc an thần, trị mất ngủ từ Tâm sen và Lạc tiên</h3>
+                
+                <!-- Body Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <!-- Left: Image -->
+                    <div class="w-full h-full min-h-[200px]">
+                        <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&h=600&fit=crop" class="w-full h-full object-cover rounded-xl shadow-sm cursor-pointer hover:opacity-95 transition-opacity">
+                    </div>
+                    
+                    <!-- Right: Info -->
+                    <div class="flex flex-col gap-3">
+                        <!-- Khu vực 1: Thành phần -->
+                        <div class="bg-[#F7F9F5] p-3.5 rounded-xl border border-green-50">
+                            <h5 class="font-bold text-sm text-[#0A2F1D] mb-2 flex items-center gap-1.5"><i data-feather="droplet" class="w-4 h-4 text-[#8CC63F]"></i> Thành phần chính:</h5>
+                            <ul class="flex flex-col gap-1.5">
+                                <li class="flex justify-between items-center text-sm">
+                                    <span class="font-medium text-gray-800">Tâm sen</span>
+                                    <span class="text-gray-500 font-semibold text-xs bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100">10g</span>
+                                </li>
+                                <li class="flex justify-between items-center text-sm">
+                                    <span class="font-medium text-gray-800">Lạc tiên</span>
+                                    <span class="text-gray-500 font-semibold text-xs bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100">15g</span>
+                                </li>
+                                <li class="flex justify-between items-center text-sm">
+                                    <span class="font-medium text-gray-800">Cam thảo</span>
+                                    <span class="text-gray-500 font-semibold text-xs bg-white px-2 py-0.5 rounded-md shadow-sm border border-gray-100">5g</span>
+                                </li>
+                            </ul>
+                            <div class="text-xs text-[#8CC63F] font-semibold mt-2.5 text-center cursor-pointer hover:underline">... và 2 vị khác</div>
+                        </div>
+
+                        <!-- Khu vực 2: Cách làm -->
+                        <div class="px-1 flex-1 flex flex-col justify-between">
+                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 recipe-desc">
+                                Đem các vị thuốc rửa sạch, cho vào ấm đất. Đổ 3 bát nước sắc còn 1 bát. Chia làm 2 lần uống trong ngày, tốt nhất là uống sau bữa ăn tối và trước khi đi ngủ 1 tiếng...
+                            </p>
+                            <span class="text-[#8CC63F] font-semibold text-sm cursor-pointer hover:underline mt-1 block btn-read-more" onclick="this.previousElementSibling.classList.remove('line-clamp-3'); this.style.display='none'">Xem chi tiết &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                    <div class="flex items-center gap-2 text-gray-500 text-sm font-semibold">
+                        <button class="flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="thumbs-up" class="w-4 h-4"></i> 1.2k</button>
+                        <button class="open-comment-btn flex items-center gap-1.5 py-1.5 px-3 hover:bg-gray-50 rounded-lg transition-colors hover:text-[#0A2F1D]" data-author="Lương y Vũ Anh" data-title="Bài thuốc an thần, trị mất ngủ từ Tâm sen và Lạc tiên"><i data-feather="message-square" class="w-4 h-4"></i> 142</button>
+                    </div>
+                    <button class="flex items-center gap-1.5 text-gray-500 hover:text-[#8CC63F] font-semibold text-sm py-1.5 px-3 hover:bg-green-50 rounded-lg transition-all border border-transparent hover:border-green-100">
+                        <i data-feather="bookmark" class="w-4 h-4"></i> Lưu bài thuốc
+                    </button>
+                </div>
+            </div>
+            <!-- Sample Post 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Nam&background=0A2F1D&color=fff" class="w-10 h-10 rounded-full">
+                        <div>
+                            <h4 class="font-bold text-[#0A2F1D] text-sm hover:underline cursor-pointer">Lương y Phương Nam</h4>
+                            <span class="text-xs text-gray-400">2 giờ trước</span>
+                        </div>
+                    </div>
+                                          
+                      </div>
+                </div>
+                <h3 class="font-bold text-lg mb-1 text-gray-900">Bài thuốc chữa cảm cúm bằng lá Tía tô</h3>
+                <p class="text-gray-700 text-sm mb-3">Lá tía tô không chỉ là một loại rau gia vị quen thuộc mà còn là một vị thuốc quý trong Đông y. Theo y học cổ truyền, tía tô có vị cay, tính ấm, tác dụng phát tán phong hàn...</p>
+                <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&h=400&fit=crop" class="w-full object-cover rounded-xl mb-3 cursor-pointer">
+                
+                <div class="flex items-center justify-between text-gray-500 text-sm mb-3 px-1">
+                    <div class="flex items-center gap-1"><span class="w-5 h-5 bg-[#8CC63F] text-white rounded-full flex items-center justify-center"><i data-feather="thumbs-up" class="w-3 h-3"></i></span> 245</div>
+                    <div>56 Bình luận</div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-2 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                    <button class="flex-1 flex items-center justify-center gap-2 py-2 hover:bg-gray-50 rounded-lg transition-colors"><i data-feather="thumbs-up" class="w-5 h-5"></i> Thích</button>
+                    <button class="open-comment-btn flex-1 flex items-center justify-center gap-2 py-2 hover:bg-gray-50 rounded-lg transition-colors" data-author="Lương y Phương Nam" data-title="Bài thuốc chữa cảm cúm bằng lá Tía tô"><i data-feather="message-square" class="w-5 h-5"></i> Bình luận</button>
+                    <button class="flex-1 flex items-center justify-center gap-2 py-2 hover:bg-gray-50 rounded-lg transition-colors"><i data-feather="share-2" class="w-5 h-5"></i> Chia sẻ</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Bình luận (Comment Modal) -->
+    <div id="commentModal" class="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="commentModalBackdrop"></div>
+        
+        <!-- Modal Box -->
+        <div class="relative w-full max-w-4xl bg-white md:rounded-2xl shadow-2xl flex flex-col h-full md:h-auto md:max-h-[90vh] overflow-hidden transform scale-95 transition-transform duration-300" id="commentModalContent">
+            
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-white z-10 shrink-0">
+                <div class="w-8"></div> <!-- Spacer -->
+                <h3 class="font-bold text-lg text-[#0A2F1D]" id="modalHeaderTitle">Bài viết của Lương y Phương Nam</h3>
+                <button id="btnCloseCommentModal" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center hover:bg-gray-200 transition-colors">
+                    <i data-feather="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Body (2 Columns) -->
+            <div class="flex flex-col md:flex-row flex-1 overflow-hidden bg-white">
+                
+                <!-- Cột trái: Bài viết (60%) -->
+                <div class="md:w-[60%] flex flex-col overflow-y-auto custom-scrollbar border-r border-gray-200 p-4 bg-black/5 md:bg-white" id="modalPostContainer">
+                    <!-- Nội dung bài viết sẽ được JS clone và ném vào đây -->
+                </div>
+
+                <!-- Cột phải: Bình luận (40%) -->
+                <div class="md:w-[40%] flex flex-col h-[50vh] md:h-auto bg-white relative">
+                    
+                    <!-- Comment Header -->
+                    <div class="px-4 py-3 border-b border-gray-100 flex items-center justify-between shrink-0">
+                        <h4 class="font-bold text-gray-800">Bình luận</h4>
+                        <select class="text-sm font-semibold text-gray-600 bg-transparent outline-none cursor-pointer">
+                            <option>Phù hợp nhất</option>
+                            <option>Mới nhất</option>
+                        </select>
+                    </div>
+
+                    <!-- Comment List -->
+                    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 flex flex-col gap-4">
+                        
+                        <!-- Comment Item -->
+                        <div class="flex gap-2">
+                            <img src="https://ui-avatars.com/api/?name=H+M&background=C8A02A&color=fff" class="w-8 h-8 rounded-full shrink-0">
+                            <div class="flex flex-col">
+                                <div class="bg-gray-100 rounded-2xl px-3 py-2">
+                                    <h5 class="font-bold text-sm text-gray-900">Hoàng Minh</h5>
+                                    <p class="text-sm text-gray-800">Bài thuốc này mình áp dụng lúc mới cảm rất hiệu quả. Cho thêm ít gừng nữa là giải cảm tuyệt vời luôn!</p>
+                                </div>
+                                <div class="flex items-center gap-3 px-3 mt-1 text-[12px] font-bold text-gray-500">
+                                    <span class="font-normal">1 giờ</span>
+                                    <button class="hover:underline">Thích</button>
+                                    <button class="hover:underline">Phản hồi</button>
+                                </div>
+
+                                <!-- Nested Comment -->
+                                <div class="flex gap-2 mt-2">
+                                    <img src="https://ui-avatars.com/api/?name=Dr+Nam&background=0A2F1D&color=fff" class="w-6 h-6 rounded-full shrink-0">
+                                    <div class="flex flex-col">
+                                        <div class="bg-gray-100 rounded-2xl px-3 py-2">
+                                            <h5 class="font-bold text-sm text-gray-900">Lương y Phương Nam</h5>
+                                            <p class="text-sm text-gray-800">Đúng rồi bạn, gừng tươi (sinh khương) kết hợp tía tô giúp tăng tác dụng phát hãn rất tốt.</p>
+                                        </div>
+                                        <div class="flex items-center gap-3 px-3 mt-1 text-[12px] font-bold text-gray-500">
+                                            <span class="font-normal">45 phút</span>
+                                            <button class="hover:underline">Thích</button>
+                                            <button class="hover:underline">Phản hồi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comment Item 2 -->
+                        <div class="flex gap-2">
+                            <img src="https://ui-avatars.com/api/?name=L+T&background=8CC63F&color=fff" class="w-8 h-8 rounded-full shrink-0">
+                            <div class="flex flex-col">
+                                <div class="bg-gray-100 rounded-2xl px-3 py-2">
+                                    <h5 class="font-bold text-sm text-gray-900">Lê Thu</h5>
+                                    <p class="text-sm text-gray-800">Cảm ơn bác sĩ đã chia sẻ.</p>
+                                </div>
+                                <div class="flex items-center gap-3 px-3 mt-1 text-[12px] font-bold text-gray-500">
+                                    <span class="font-normal">15 phút</span>
+                                    <button class="hover:underline">Thích</button>
+                                    <button class="hover:underline">Phản hồi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment Input (Sticky Bottom) -->
+                    <div class="p-3 border-t border-gray-200 bg-white shrink-0 flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-[#8CC63F] text-white flex items-center justify-center font-bold text-xs shrink-0">US</div>
+                        <div class="flex-1 bg-gray-100 rounded-full flex items-center px-3 py-1.5 relative">
+                            <input type="text" placeholder="Viết bình luận..." class="bg-transparent w-full outline-none text-sm text-gray-800 pr-20 py-1">
+                            <div class="absolute right-2 flex items-center gap-1.5 text-gray-400">
+                                <button class="hover:text-gray-600 transition-colors"><i data-feather="smile" class="w-4 h-4"></i></button>
+                                <button class="hover:text-gray-600 transition-colors"><i data-feather="camera" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                        <button class="w-8 h-8 rounded-full bg-green-50 text-[#8CC63F] flex items-center justify-center hover:bg-green-100 transition-colors shrink-0">
+                            <i data-feather="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tạo bài viết -->
+        <!-- Modal Tạo bài viết -->
+    <div id="createPostModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" id="createPostBackdrop"></div>
+        <div class="relative w-full max-w-3xl bg-white rounded-2xl shadow-xl flex flex-col max-h-[90vh] overflow-hidden transform scale-95 transition-transform duration-300" id="createPostContent">
+            
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-white z-10">
+                <h3 class="font-bold text-xl text-[#0A2F1D]">Tạo bài viết</h3>
+                <button id="btnClosePostModal" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center hover:bg-gray-200 transition-colors">
+                    <i data-feather="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 bg-white">
+                
+                <!-- 2 Tabs (Pills) -->
+                <div class="flex gap-3 mb-6 bg-gray-50 p-1.5 rounded-xl border border-gray-100 w-max">
+                    <button id="btnTabNormalPost" class="px-5 py-2 rounded-lg font-bold text-sm bg-white text-[#0A2F1D] shadow-sm transition-all border border-gray-200">Chia sẻ chung</button>
+                    <button id="btnTabRemedyPost" class="px-5 py-2 rounded-lg font-bold text-sm text-gray-500 hover:text-gray-700 transition-all border border-transparent">Đóng góp bài thuốc</button>
+                </div>
+
+                <!-- FORM 1: Chia sẻ chung -->
+                <div id="formNormalPost" class="flex flex-col gap-4">
+                    <input type="text" placeholder="Nhập tiêu đề..." class="w-full text-lg font-bold text-gray-800 placeholder-gray-400 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[#8CC63F] focus:ring-1 focus:ring-[#8CC63F]">
+                    
+                    <textarea placeholder="Bạn muốn chia sẻ điều gì?" class="w-full h-32 resize-none text-gray-700 placeholder-gray-400 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[#8CC63F] focus:ring-1 focus:ring-[#8CC63F]"></textarea>
+
+                    <div class="border-2 border-dashed border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-50 hover:border-[#8CC63F] transition-colors cursor-pointer group">
+                        <div class="bg-gray-100 p-3 rounded-full mb-2 group-hover:bg-[#F7F9F5] group-hover:text-[#8CC63F] transition-colors">
+                            <i data-feather="image" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-sm font-semibold">Tải ảnh lên (hoặc kéo thả)</span>
+                    </div>
+                </div>
+
+                <!-- FORM 2: Đóng góp bài thuốc -->
+                <div id="formRemedyPost" class="hidden flex-col gap-5">
+                    
+                    <!-- Thông tin chung -->
+                    <div class="flex flex-col gap-4">
+                        <input type="text" placeholder="Tên bài thuốc..." class="w-full text-lg font-bold text-gray-800 placeholder-gray-400 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[#8CC63F] focus:ring-1 focus:ring-[#8CC63F]">
+                        
+                        <textarea placeholder="Công thức & Cách làm..." class="w-full h-24 resize-none text-gray-700 placeholder-gray-400 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[#8CC63F] focus:ring-1 focus:ring-[#8CC63F]"></textarea>
+
+                        <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-50 hover:border-[#8CC63F] transition-colors cursor-pointer group">
+                            <i data-feather="image" class="w-5 h-5 mb-1 group-hover:text-[#8CC63F]"></i>
+                            <span class="text-xs font-semibold">Tải ảnh minh họa</span>
+                        </div>
+                    </div>
+
+                    <!-- Thành phần vị thuốc -->
+                    <div class="bg-gray-50 p-5 rounded-xl border border-gray-100 mt-2">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="font-bold text-[#0A2F1D] text-sm flex items-center gap-2"><i data-feather="list" class="w-4 h-4 text-[#8CC63F]"></i> Thành phần vị thuốc</h4>
+                            <button class="text-xs font-bold text-[#8CC63F] border border-[#8CC63F] px-3 py-1.5 rounded-full hover:bg-[#F7F9F5] transition-colors flex items-center gap-1">
+                                <i data-feather="plus" class="w-3 h-3"></i> Thêm vị thuốc
+                            </button>
+                        </div>
+
+                        <!-- Danh sách các vị thuốc (Field Array) -->
+                        <div class="flex flex-col gap-3">
+                            
+                            <!-- Row 1 -->
+                            <div class="flex gap-2 items-center bg-white p-2 border border-gray-200 rounded-lg shadow-sm">
+                                <input type="text" placeholder="Tên vị thuốc..." class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <input type="text" placeholder="Hàm lượng (vd: 10g)" class="w-32 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <input type="text" placeholder="Ghi chú..." class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <button class="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                            
+                            <!-- Row 2 -->
+                            <div class="flex gap-2 items-center bg-white p-2 border border-gray-200 rounded-lg shadow-sm">
+                                <input type="text" placeholder="Tên vị thuốc..." class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <input type="text" placeholder="Hàm lượng (vd: 10g)" class="w-32 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <input type="text" placeholder="Ghi chú..." class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-md outline-none focus:border-[#8CC63F]">
+                                <button class="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer chung -->
+            <div class="p-5 border-t border-gray-100 bg-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-xs italic text-gray-500 max-w-xs text-center sm:text-left">Bài viết của bạn sẽ được đội ngũ Admin kiểm duyệt trước khi hiển thị tới cộng đồng.</p>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button id="btnCancelPostModal" class="flex-1 sm:flex-none text-gray-500 font-bold px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors">Hủy</button>
+                    <button class="flex-1 sm:flex-none bg-[#0A2F1D] text-white font-bold px-8 py-2.5 rounded-full hover:bg-[#134E34] shadow-md transition-all">Đăng bài</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal Xem Ảnh (Lightbox) -->
+    <div id="imageLightboxModal" class="fixed inset-0 z-[70] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm cursor-pointer" id="lightboxBackdrop"></div>
+        <button id="btnCloseLightbox" class="absolute top-4 right-4 text-white hover:text-gray-300 z-10 p-2">
+            <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+        <img id="lightboxImage" src="" class="max-w-full max-h-[90vh] object-contain relative z-10 rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
+<script>
+        feather.replace();
+
+        // Logic Modal Tạo Bài Viết
+        const btnOpen = document.getElementById('btnOpenPostModal');
+        const btnClose = document.getElementById('btnClosePostModal');
+        const backdrop = document.getElementById('createPostBackdrop');
+        const modal = document.getElementById('createPostModal');
+        const modalContent = document.getElementById('createPostContent');
+
+        function openModal() { modal.classList.remove('opacity-0', 'pointer-events-none'); modalContent.classList.remove('scale-95'); }
+        function closeModal() { modal.classList.add('opacity-0', 'pointer-events-none'); modalContent.classList.add('scale-95'); }
+
+                btnOpen.addEventListener('click', openModal);
+        btnClose.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+        const btnCancel = document.getElementById('btnCancelPostModal');
+        if (btnCancel) btnCancel.addEventListener('click', closeModal);
+        // Logic Tab trong Modal Tạo Bài Viết
+        const btnTabNormal = document.getElementById('btnTabNormalPost');
+        const btnTabRemedy = document.getElementById('btnTabRemedyPost');
+        const formNormal = document.getElementById('formNormalPost');
+        const formRemedy = document.getElementById('formRemedyPost');
+
+        if(btnTabNormal && btnTabRemedy) {
+            btnTabNormal.addEventListener('click', () => {
+                btnTabNormal.className = "px-5 py-2 rounded-lg font-bold text-sm bg-white text-[#0A2F1D] shadow-sm transition-all border border-gray-200";
+                btnTabRemedy.className = "px-5 py-2 rounded-lg font-bold text-sm text-gray-500 hover:text-gray-700 transition-all border border-transparent";
+                formNormal.style.display = 'flex';
+                formRemedy.style.display = 'none';
+            });
+            btnTabRemedy.addEventListener('click', () => {
+                btnTabRemedy.className = "px-5 py-2 rounded-lg font-bold text-sm bg-white text-[#0A2F1D] shadow-sm transition-all border border-gray-200";
+                btnTabNormal.className = "px-5 py-2 rounded-lg font-bold text-sm text-gray-500 hover:text-gray-700 transition-all border border-transparent";
+                formNormal.style.display = 'none';
+                formRemedy.style.display = 'flex';
+            });
+        }
+
+        // Logic Modal Bình Luận
+        const btnOpenComments = document.querySelectorAll('.open-comment-btn');
+        const btnCloseComment = document.getElementById('btnCloseCommentModal');
+        const commentBackdrop = document.getElementById('commentModalBackdrop');
+        const commentModal = document.getElementById('commentModal');
+        const commentContent = document.getElementById('commentModalContent');
+
+                        function openCommentModal(e) { 
+            const btn = e.currentTarget;
+            if(btn) {
+                // Đổi tiêu đề Header Modal
+                const author = btn.getAttribute('data-author') || 'Tác giả';
+                document.getElementById('modalHeaderTitle').innerText = 'Bài viết của ' + author;
+
+                // Clone toàn bộ Card bài viết hiện tại
+                const postCard = btn.closest('.bg-white.rounded-2xl.shadow-sm');
+                if(postCard) {
+                    const clonedCard = postCard.cloneNode(true);
+                    
+                    // Xóa footer (nút Like, Comment) trong bản clone
+                    const footer = clonedCard.querySelector('.border-t.border-gray-100');
+                    if(footer) footer.remove();
+
+                    // Bỏ style shadow và border cho bản clone vì nó nằm trong modal rồi
+                    clonedCard.classList.remove('shadow-sm', 'border', 'border-gray-100');
+                    clonedCard.style.padding = '0';
+
+                    // Gắn vào cột trái Modal
+                    const container = document.getElementById('modalPostContainer');
+                    container.innerHTML = '';
+                    container.appendChild(clonedCard);
+                }
+            }
+            
+            commentModal.classList.remove('opacity-0', 'pointer-events-none'); 
+            commentContent.classList.remove('scale-95'); 
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeCommentModal() { commentModal.classList.add('opacity-0', 'pointer-events-none'); commentContent.classList.add('scale-95'); document.body.style.overflow = ''; }
+
+        if(btnOpenComments.length > 0) btnOpenComments.forEach(btn => btn.addEventListener('click', openCommentModal));
+        if(btnCloseComment) btnCloseComment.addEventListener('click', closeCommentModal);
+        if(commentBackdrop) commentBackdrop.addEventListener('click', closeCommentModal);
+                                            // Chuyển hướng khi click vào Avatar
+        document.body.addEventListener('click', function(e) {
+            const img = e.target.closest('img[src*="ui-avatars.com"]');
+            if (img && !img.closest('#userProfileModal')) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                let author = img.getAttribute('data-author');
+                let avatar = img.getAttribute('data-avatar') || img.src;
+                
+                if(!author) {
+                    try {
+                        const url = new URL(avatar.replace(/&amp;/g, '&'));
+                        const nameParam = url.searchParams.get('name');
+                        if(nameParam) {
+                            author = nameParam.replace(/\+/g, ' ');
+                        } else {
+                            author = 'Chuyên gia HerbaPedia';
+                        }
+                    } catch(err) {
+                        author = 'Chuyên gia HerbaPedia';
+                    }
+                }
+                
+                // Chuyển hướng sang trang mới
+                window.location.href = `user-profile.html?author=${encodeURIComponent(author)}&avatar=${encodeURIComponent(avatar)}`;
+            }
+        });
+
+
+
+
+        
+        // Logic Modal Xem Ảnh (Lightbox)
+        const lightboxModal = document.getElementById('imageLightboxModal');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+        const btnCloseLightbox = document.getElementById('btnCloseLightbox');
+
+        function openLightbox(src) {
+            if(!lightboxModal) return;
+            lightboxImg.src = src;
+            lightboxModal.classList.remove('opacity-0', 'pointer-events-none');
+            lightboxImg.classList.remove('scale-95');
+        }
+
+        function closeLightbox() {
+            if(!lightboxModal) return;
+            lightboxModal.classList.add('opacity-0', 'pointer-events-none');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
+        }
+
+        document.body.addEventListener('click', function(e) {
+            // Check if click is on an image inside a post, and not an avatar
+            if (e.target.tagName === 'IMG' && !e.target.classList.contains('rounded-full') && !e.target.closest('header') && !e.target.closest('#imageLightboxModal')) {
+                // If it's a feed image, open it
+                openLightbox(e.target.src);
+            }
+        });
+
+        if (btnCloseLightbox) btnCloseLightbox.addEventListener('click', closeLightbox);
+        if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+
+
+    
+        
+
+
+
+    </script>
+</body>
+</html>

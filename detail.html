@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Dược liệu - HerbaPedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        sage: { 50: '#eef1e6' },
+                        forest: { 900: '#1b3b22' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-sage-50 font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Background Shadows -->
+    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?auto=format&fit=crop&w=600&q=80" alt="Shadow" class="fixed -top-10 -left-32 w-[40rem] opacity-[0.05] mix-blend-multiply blur-[2px] pointer-events-none transform -rotate-12 grayscale z-0">
+    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=600&q=80" alt="Shadow" class="fixed -bottom-20 -right-20 w-[45rem] opacity-[0.04] mix-blend-multiply blur-[3px] pointer-events-none transform rotate-12 grayscale z-0">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/80 border-b border-white/40 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-forest-900 cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-yellow-500">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Trang chủ</a></li>
+                <li><a href="search.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Tra cứu</a></li>
+                <li><a href="history.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Cộng đồng</a></li>
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-6xl mx-auto px-6 flex-1 flex flex-col mt-8 mb-16">
+        
+        <div class="text-sm text-gray-500 mb-6 flex items-center gap-2">
+            <a href="search.html" class="hover:text-forest-900 transition-colors">Tra cứu</a>
+            <i data-feather="chevron-right" class="w-4 h-4"></i>
+            <span id="breadName" class="font-semibold text-forest-900">Lá Tía Tô</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Cột trái: Thông tin chính -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Header Dược liệu -->
+                <div class="bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] rounded-3xl p-8">
+                    <span class="inline-flex items-center gap-1 bg-yellow-300 text-forest-900 px-4 py-1.5 rounded-full text-xs font-bold mb-4 shadow-sm border border-yellow-400"><i data-feather="check-circle" class="w-3.5 h-3.5"></i> Đã xác thực</span>
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold text-forest-900 mb-2 h-name">Lá Tía Tô</h1>
+                    <h3 class="italic text-gray-500 text-lg h-scientific">Perilla frutescens</h3>
+                    
+                    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=800&q=80" alt="Lá tía tô" class="w-full h-80 object-cover rounded-2xl mt-8 shadow-sm">
+                </div>
+
+                <!-- Cảnh báo -->
+                <div class="bg-red-50/80 backdrop-blur-md border border-red-200 rounded-3xl p-6 shadow-sm">
+                    <h4 class="text-red-700 font-bold text-lg mb-2 flex items-center gap-2"><i data-feather="alert-triangle" class="w-5 h-5"></i> Chống chỉ định & Lưu ý an toàn</h4>
+                    <p class="text-red-900/80 text-sm leading-relaxed">Không dùng cho người biểu hư, mồ hôi trộm. Phụ nữ có thai cần thận trọng liều lượng.</p>
+                </div>
+
+                <!-- Nội dung chi tiết -->
+                <div class="bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] rounded-3xl p-8 space-y-8">
+                    <div class="info-section">
+                        <h3 class="font-serif text-xl font-bold text-forest-900 inline-block border-b-2 border-yellow-400 pb-1 mb-4">Chức năng chính</h3>
+                        <p class="text-gray-700 leading-relaxed font-light">Tán hàn, giải biểu, lý khí, an thai, giải độc cua cá.</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h3 class="font-serif text-xl font-bold text-forest-900 inline-block border-b-2 border-yellow-400 pb-1 mb-4">Đặc điểm nhận dạng</h3>
+                        <p class="text-gray-700 leading-relaxed font-light">Cây thảo sống hàng năm, cao 0,5 - 1m. Lá mọc đối, mép khía răng, mặt dưới tím tía hoặc cả 2 mặt đều tía.</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3 class="font-serif text-xl font-bold text-forest-900 inline-block border-b-2 border-yellow-400 pb-1 mb-4">Bài thuốc ứng dụng</h3>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 text-gray-700 font-light">
+                                <i data-feather="feather" class="w-5 h-5 text-yellow-500 shrink-0 mt-0.5"></i>
+                                <span><strong class="font-bold text-forest-900">Chữa cảm lạnh:</strong> Nấu cháo hành tía tô ăn nóng lúc ra mồ hôi.</span>
+                            </li>
+                            <li class="flex gap-3 text-gray-700 font-light">
+                                <i data-feather="feather" class="w-5 h-5 text-yellow-500 shrink-0 mt-0.5"></i>
+                                <span><strong class="font-bold text-forest-900">Chữa đau bụng, đầy hơi:</strong> Sắc lá tía tô cùng gừng tươi uống ấm.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Sidebar -->
+            <div class="space-y-8">
+                <!-- Thống kê cộng đồng -->
+                <div class="bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] rounded-3xl p-6">
+                    <h3 class="font-serif text-xl font-bold text-forest-900 mb-6">Dữ liệu cộng đồng</h3>
+                    
+                    <div class="mb-5 hidden" id="userAccuracyBlock">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Độ chính xác AI (Bạn)</span>
+                            <span class="font-bold text-forest-900">96%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-green-500 to-yellow-400 h-2 rounded-full" style="width: 96%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Trung bình cộng đồng</span>
+                            <span class="font-bold text-gray-700">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-400 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-forest-900 mb-3">Lịch sử cộng đồng</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=200&q=50" class="w-full h-20 object-cover rounded-xl shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?w=200&q=50" class="w-full h-20 object-cover rounded-xl shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=200&q=50" class="w-full h-20 object-cover rounded-xl shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=200&q=50" class="w-full h-20 object-cover rounded-xl shadow-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đánh giá -->
+                <div class="bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] rounded-3xl p-6">
+                    <h3 class="font-serif text-xl font-bold text-forest-900 mb-4">Đánh giá kết quả này</h3>
+                    
+                    <div class="flex gap-2 mb-4 text-gray-300 star-rating cursor-pointer">
+                        <!-- Sử dụng feather icons cho stars -->
+                        <svg class="w-8 h-8 star-icon transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="w-8 h-8 star-icon transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="w-8 h-8 star-icon transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="w-8 h-8 star-icon transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="w-8 h-8 star-icon transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    
+                    <textarea class="w-full bg-white/60 border border-gray-200 rounded-2xl p-4 text-sm outline-none focus:border-forest-900 transition-colors resize-y min-h-[100px]" placeholder="Chia sẻ trải nghiệm của bạn..."></textarea>
+                    
+                    <button class="w-full mt-4 bg-forest-900 text-white rounded-full py-3 font-semibold text-sm hover:bg-[#132a18] transition-colors shadow-sm">Gửi đánh giá</button>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200/50 space-y-6">
+                        <div class="border-b border-gray-200/50 pb-6 last:border-0 last:pb-0">
+                            <div class="flex justify-between items-start mb-2">
+                                <strong class="text-forest-900 text-sm font-bold">Nguyễn Văn A</strong>
+                                <div class="flex text-yellow-400">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 font-light mb-3">Nhận diện rất chuẩn xác, cảm ơn app!</p>
+                            <div class="flex gap-4 text-xs text-gray-400 font-medium">
+                                <span class="flex items-center gap-1 cursor-pointer hover:text-forest-900 transition-colors"><i data-feather="thumbs-up" class="w-3.5 h-3.5"></i> Hữu ích (12)</span>
+                                <span class="flex items-center gap-1 cursor-pointer hover:text-forest-900 transition-colors"><i data-feather="thumbs-down" class="w-3.5 h-3.5"></i> Không hữu ích</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-gray-500 text-sm font-light mt-auto border-t border-white/20">
+        <p>&copy; 2026 HerbaPedia. Phát triển vì sức khỏe cộng đồng.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+            <script>
+        feather.replace();
+
+        // JS Rating Stars
+        const stars = document.querySelectorAll('.star-icon');
+        stars.forEach((star, idx) => {
+            star.addEventListener('click', () => {
+                // Reset all
+                stars.forEach(s => { s.classList.remove('text-yellow-400'); s.setAttribute('fill', 'none'); });
+                // Fill up to idx
+                for(let i=0; i<=idx; i++) {
+                    stars[i].classList.add('text-yellow-400');
+                    stars[i].setAttribute('fill', 'currentColor');
+                }
+            });
+        });
+
+        // Dynamic content for static demo based on ?name=
+        const urlParams = new URLSearchParams(window.location.search);
+        const nameParam = urlParams.get('name');
+
+        const plantData = {
+            'tiato': {
+                name: 'Tía tô',
+                sci: 'Perilla frutescens (L.) Britton',
+                img: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=800&q=80'
+            },
+            'tamsen': {
+                name: 'Tâm sen',
+                sci: 'Nelumbo nucifera Gaertn',
+                img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?auto=format&fit=crop&w=800&q=80'
+            },
+            'lactien': {
+                name: 'Lạc tiên',
+                sci: 'Passiflora foetida L.',
+                img: 'https://images.unsplash.com/photo-1463123081488-789f998ac9c4?auto=format&fit=crop&w=800&q=80'
+            },
+            'diephachau': {
+                name: 'Diệp hạ châu',
+                sci: 'Phyllanthus urinaria L.',
+                img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80'
+            }
+        };
+
+        if (nameParam && plantData[nameParam]) {
+            // Update Title
+            const h1 = document.querySelector('.h-name');
+            if (h1) h1.innerText = plantData[nameParam].name;
+
+            // Update Breadcrumb
+            const bread = document.getElementById('breadName');
+            if (bread) bread.innerText = plantData[nameParam].name;
+
+            // Update Scientific Name
+            const sciName = document.querySelector('.h-scientific');
+            if (sciName) sciName.innerText = plantData[nameParam].sci;
+
+            // Update Header Image
+            const img = document.querySelector('.h-80.object-cover');
+            if (img) {
+                img.src = plantData[nameParam].img;
+                img.alt = plantData[nameParam].name;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

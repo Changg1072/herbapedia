@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhận diện - HerbaPedia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+    </style>
+</head>
+<body class=" font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/60 border-b border-gray-100 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-[#0A2F1D] cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-[#8CC63F]">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-[#0A2F1D] transition-colors pb-1">Trang chủ</a></li>
+                <li><a href="search.html" class="hover:text-[#0A2F1D] transition-colors pb-1">Tra cứu</a></li>
+                <li><a href="history.html" class="hover:text-[#0A2F1D] transition-colors pb-1">Cộng đồng</a></li>
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full flex-1 flex items-center justify-center py-8 px-4">
+        
+        <!-- NhanDien Box (Extracted from Modal) -->
+        <div class="relative w-full max-w-5xl bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100 flex flex-col">
+            
+            <a href="index.html" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center hover:bg-gray-200 transition-colors z-10">
+                <i data-feather="x" class="w-5 h-5"></i>
+            </a>
+
+            <!-- Header -->
+            <div class="w-full pr-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-[#0A2F1D]">Nhận diện dược liệu</h2>
+                <p class="text-gray-500 mt-1 text-sm md:text-base">Xem luồng video trực tiếp từ camera hoặc tải ảnh từ máy tính để nhận diện</p>
+                
+                <!-- Status Bar -->
+                <div class="mt-4 bg-[#F0F7E6] text-[#2A4D14] rounded-lg p-3 flex items-center gap-2 font-medium text-sm">
+                    <i data-feather="check-circle" class="w-5 h-5"></i>
+                    Hệ thống Pi đã sẵn sàng kết nối.
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 flex-1">
+                
+                <!-- Left Column (Camera) -->
+                <div class="lg:col-span-2 flex flex-col">
+                    <!-- Tabs -->
+                    <div class="flex items-center gap-6 border-b border-gray-200 mb-4 px-2">
+                        <button class="pb-3 text-[#8CC63F] font-bold border-b-4 border-[#8CC63F]">Camera</button>
+                        <button class="pb-3 text-gray-400 font-medium hover:text-gray-600 transition-colors">Tải ảnh lên</button>
+                    </div>
+
+                    <!-- Camera Frame -->
+                    <div class=" rounded-2xl overflow-hidden aspect-[4/3] relative flex items-center justify-center border border-gray-100 shadow-inner group">
+                        <i data-feather="camera-off" id="camPlaceholderIcon" class="w-12 h-12 text-gray-300"></i>
+                        <p id="camPlaceholderText" class="absolute bottom-4 text-gray-400 text-sm">Đang chờ tín hiệu video...</p>
+                        <!-- Video Element -->
+                        <video id="advVideoElement" autoplay playsinline class="absolute inset-0 w-full h-full object-cover hidden"></video>
+                        <img id="imagePreview" class="absolute inset-0 w-full h-full object-contain hidden" />
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <button id="btnAdvCapture" class="bg-[#0A2F1D] text-white rounded-full px-8 py-3 font-bold flex items-center gap-2 hover:bg-[#134E34] transition-all shadow-md hover:-translate-y-0.5">
+                            <i data-feather="camera" class="w-5 h-5"></i>
+                            Chụp ảnh và nhận diện
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 rounded-full px-6 py-3 font-semibold hover:bg-gray-200 transition-colors">
+                            Tạm dừng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column (Controls) -->
+                <div class="lg:col-span-1  border border-gray-100 rounded-2xl p-4 flex flex-col gap-4 shadow-sm overflow-y-auto max-h-[600px] custom-scrollbar">
+                    <div class="flex items-center gap-2 text-[#0A2F1D] font-bold text-lg mb-2">
+                        <i data-feather="settings" class="w-5 h-5"></i>
+                        Điều khiển Camera
+                    </div>
+
+                    <!-- Card 1 -->
+                    <div class="bg-white shadow-sm rounded-xl p-4 border border-gray-50 flex flex-col gap-3">
+                        <label class="text-sm font-semibold text-gray-700">Chế độ nhanh</label>
+                        <select class="w-full  border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 outline-none focus:border-[#8CC63F]">
+                            <option>Chế độ Tiêu chuẩn</option>
+                            <option>Chế độ Cận cảnh (Macro)</option>
+                            <option>Chế độ Thiếu sáng</option>
+                        </select>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button class="flex-1 bg-[#8CC63F] text-white text-sm font-bold rounded-full py-2 hover:bg-green-500 transition-colors">Áp dụng</button>
+                            <button class="flex-1 border border-red-200 text-red-500 text-sm font-bold rounded-full py-2 hover:bg-red-50 transition-colors">Xóa</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white shadow-sm rounded-xl p-4 border border-gray-50 flex flex-col gap-4">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-semibold text-gray-700">Nhận diện tự động AI</label>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-500 mb-2">
+                                <span>Độ tin cậy tối thiểu</span>
+                                <span class="font-bold text-[#8CC63F]">35%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="35" class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#8CC63F]">
+                        </div>
+                        <button class="w-full bg-[#8CC63F] text-white text-sm font-bold rounded-full py-2.5 hover:bg-green-500 transition-colors shadow-sm hover:-translate-y-0.5">Bắt đầu quét</button>
+                        <div class="bg-yellow-50 text-yellow-700 text-xs p-2 rounded-lg leading-relaxed">
+                            <i data-feather="info" class="w-3 h-3 inline-block mr-1 -mt-0.5"></i>
+                            Hệ thống sẽ liên tục quét hình ảnh cho đến khi đạt độ tin cậy được thiết lập.
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white shadow-sm rounded-xl p-4 border border-gray-50 flex flex-col gap-3">
+                        <label class="text-sm font-semibold text-gray-700">Lưu thông số</label>
+                        <input type="text" placeholder="Tên cấu hình (VD: Ánh sáng ban ngày)" class="w-full  border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 outline-none focus:border-[#8CC63F]">
+                        <label class="flex items-center gap-2 cursor-pointer mt-1">
+                            <input type="checkbox" class="w-4 h-4 text-[#8CC63F] rounded border-gray-300 focus:ring-[#8CC63F]">
+                            <span class="text-sm text-gray-600">Đặt làm mặc định</span>
+                        </label>
+                        <button class="w-full bg-[#0A2F1D] text-white text-sm font-bold rounded-full py-2.5 hover:bg-[#134E34] transition-colors mt-1">Lưu thiết lập</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        feather.replace();
+        
+        // Simple script to handle camera in the new separate page
+        document.addEventListener('DOMContentLoaded', async () => {
+            const advVideoElement = document.getElementById('advVideoElement');
+            const camPlaceholderIcon = document.getElementById('camPlaceholderIcon');
+            const camPlaceholderText = document.getElementById('camPlaceholderText');
+            const btnAdvCapture = document.getElementById('btnAdvCapture');
+            
+            let stream = null;
+            
+            // Auto open camera if available
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                advVideoElement.srcObject = stream;
+                advVideoElement.style.display = 'block';
+                camPlaceholderIcon.style.display = 'none';
+                camPlaceholderText.style.display = 'none';
+            } catch (err) {
+                camPlaceholderText.innerText = 'Không thể kết nối camera.';
+            }
+
+            btnAdvCapture.addEventListener('click', () => {
+                btnAdvCapture.innerHTML = '<i data-feather="loader" class="w-5 h-5 animate-spin"></i> Đang phân tích...';
+                feather.replace();
+                
+                setTimeout(() => {
+                    if (stream && advVideoElement) {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = advVideoElement.videoWidth || 400;
+                        canvas.height = advVideoElement.videoHeight || 300;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(advVideoElement, 0, 0, canvas.width, canvas.height);
+                        const capturedImage = canvas.toDataURL('image/jpeg');
+                        localStorage.setItem('lastCapturedImage', capturedImage);
+                        
+                        stream.getTracks().forEach(track => track.stop());
+                    }
+                    window.location.href = 'result.html';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

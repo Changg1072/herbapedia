@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Cá nhân - HerbaPedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class=" font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-40 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/80 border-b border-gray-100 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-[#0A2F1D] cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-[#8CC63F]">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Trang chủ</a></li>
+                <li><a href="search.html" class="hover:text-[#0A2F1D] transition-colors pb-1 border-b-2 border-transparent">Tra cứu</a></li>
+                <li><a href="history.html" class="text-[#0A2F1D] transition-colors pb-1 border-b-2 border-[#8CC63F]">Cộng đồng</a></li>
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-4xl mx-auto px-6 flex-1 flex flex-col mt-10 mb-16">
+        
+        <div class="mb-4">
+            <a href="history.html" class="inline-flex items-center gap-1.5 text-gray-500 hover:text-[#0A2F1D] transition-colors font-semibold text-sm">
+                <i data-feather="arrow-left" class="w-4 h-4"></i> Quay lại Cộng đồng
+            </a>
+        </div>
+
+        <!-- Khối Thông tin Người dùng -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex justify-between items-start mb-8">
+            <div class="flex flex-col">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#0A2F1D] font-serif" id="profileName">Lương y Phương Nam</h1>
+                <div class="flex items-center gap-2 text-gray-500 mt-2">
+                    <i data-feather="mail" class="w-4 h-4"></i>
+                    <span class="text-base" id="profileEmail">phuongnam.luongy@herbapedia.vn</span>
+                </div>
+                <div class="mt-4 flex items-center gap-2">
+                    <span class="bg-[#F7F9F5] text-[#8CC63F] px-3 py-1 rounded-full text-xs font-bold border border-[#E8F2DB]"><i data-feather="check-circle" class="w-3 h-3 inline mr-1 -mt-0.5"></i>Chuyên gia y khoa</span>
+                </div>
+            </div>
+            <img src="https://ui-avatars.com/api/?name=P+N&background=0A2F1D&color=fff" id="profileAvatar" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-gray-50 shadow-sm shrink-0">
+        </div>
+
+        <!-- Thanh Tab -->
+        <div class="border-b border-gray-200 mb-8 flex gap-8">
+            <button class="pb-3 text-[#0A2F1D] font-bold text-lg border-b-4 border-[#8CC63F] transition-colors">Blog cá nhân</button>
+        </div>
+
+        <!-- Danh sách Bài viết của tác giả -->
+        <div class="flex flex-col gap-6">
+            
+            <!-- Card 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=P+N&background=0A2F1D&color=fff" class="w-10 h-10 rounded-full shrink-0">
+                        <div>
+                            <h4 class="font-bold text-[#0A2F1D] text-sm">Lương y Phương Nam</h4>
+                            <span class="text-xs text-gray-400">2 giờ trước</span>
+                        </div>
+                    </div>
+                    <button class="text-gray-400 hover: p-2 rounded-full transition-colors"><i data-feather="more-horizontal" class="w-5 h-5"></i></button>
+                </div>
+                <!-- Body -->
+                <h3 class="font-bold text-xl mb-3 text-[#0A2F1D]">Bài thuốc chữa cảm cúm bằng lá Tía tô</h3>
+                <p class="text-gray-700 text-sm mb-4 leading-relaxed line-clamp-3">Lá tía tô có vị cay, tính ấm. Khi kết hợp với hành hoa và gừng tươi nấu cháo sẽ giúp giải cảm, toát mồ hôi cực kỳ hiệu quả trong mùa lạnh. Bà con chỉ cần làm theo công thức dưới đây...</p>
+                <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80" class="w-full h-64 object-cover rounded-xl mb-4">
+                <!-- Footer -->
+                <div class="flex items-center gap-4 pt-4 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                    <button class="flex items-center gap-2 px-3 py-2 hover: rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="heart" class="w-5 h-5"></i> 234 Thích</button>
+                    <button class="flex items-center gap-2 px-3 py-2 hover: rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="message-circle" class="w-5 h-5"></i> 45 Bình luận</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=P+N&background=0A2F1D&color=fff" class="w-10 h-10 rounded-full shrink-0">
+                        <div>
+                            <h4 class="font-bold text-[#0A2F1D] text-sm">Lương y Phương Nam</h4>
+                            <span class="text-xs text-gray-400">1 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="font-bold text-xl mb-3 text-[#0A2F1D]">Tâm sen - Vị thuốc vàng cho giấc ngủ</h3>
+                <p class="text-gray-700 text-sm mb-4 leading-relaxed line-clamp-3">Chồi mầm bên trong hạt sen có chứa nhiều alcaloid giúp an thần. Tuy nhiên nếu lạm dụng có thể gây ra rối loạn nhịp tim. Nên dùng với liều lượng vừa đủ và có sao vàng hạ thổ trước khi hãm trà.</p>
+                <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?w=800&q=80" class="w-full h-64 object-cover rounded-xl mb-4">
+                <div class="flex items-center gap-4 pt-4 border-t border-gray-100 text-gray-500 text-sm font-semibold">
+                    <button class="flex items-center gap-2 px-3 py-2 hover: rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="heart" class="w-5 h-5"></i> 512 Thích</button>
+                    <button class="flex items-center gap-2 px-3 py-2 hover: rounded-lg transition-colors hover:text-[#0A2F1D]"><i data-feather="message-circle" class="w-5 h-5"></i> 102 Bình luận</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-8 text-gray-500 text-sm font-medium mt-auto border-t border-gray-100">
+        <p>&copy; 2026 HerbaPedia. Phát triển vì sức khỏe cộng đồng.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        feather.replace();
+
+        // Logic để load name linh động dựa vào tham số ?author=...
+        const urlParams = new URLSearchParams(window.location.search);
+        let authorParam = urlParams.get('author');
+        let avatarParam = urlParams.get('avatar');
+        
+        if (authorParam) {
+            document.getElementById('profileName').innerText = authorParam;
+            // Thay đổi tên tác giả ở các card bài viết
+            document.querySelectorAll('h4').forEach(h4 => h4.innerText = authorParam);
+            document.title = "Blog của " + authorParam + " - HerbaPedia";
+            
+            // Xử lý email giả định
+            let username = authorParam.toLowerCase().replace(/ /g, '.');
+            // Bỏ dấu tiếng việt
+            username = username.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+            document.getElementById('profileEmail').innerText = username + '@herbapedia.vn';
+        }
+        
+        if (avatarParam) {
+            document.getElementById('profileAvatar').src = avatarParam;
+            // Đổi avatar nhỏ ở các card
+            const smallAvatars = document.querySelectorAll('img.w-10.h-10');
+            smallAvatars.forEach(img => img.src = avatarParam);
+        }
+    </script>
+</body>
+</html>

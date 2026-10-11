@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Botanical - HerbaPedia</title>
+    <!-- Tailwind CSS qua CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: Playfair Display (Serif cho Tiêu đề) & Nunito (Sans-serif cho Văn bản) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons (Icon tối giản, nét mảnh) -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Cấu hình Tailwind Custom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        sage: {
+                            50: '#fdfbf7', // Off-white / light sage background
+                        },
+                        forest: {
+                            900: '#1b3b22', // Dark Forest Green
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Các góc ngoặc vuông (viewfinder) bằng CSS thuần để khung hình sạch sẽ */
+        .viewfinder-tl { position: absolute; top: 1.5rem; left: 1.5rem; width: 2rem; height: 2rem; border-top: 1.5px solid rgba(255,255,255,0.8); border-left: 1.5px solid rgba(255,255,255,0.8); border-top-left-radius: 4px; }
+        .viewfinder-tr { position: absolute; top: 1.5rem; right: 1.5rem; width: 2rem; height: 2rem; border-top: 1.5px solid rgba(255,255,255,0.8); border-right: 1.5px solid rgba(255,255,255,0.8); border-top-right-radius: 4px; }
+        .viewfinder-bl { position: absolute; bottom: 1.5rem; left: 1.5rem; width: 2rem; height: 2rem; border-bottom: 1.5px solid rgba(255,255,255,0.8); border-left: 1.5px solid rgba(255,255,255,0.8); border-bottom-left-radius: 4px; }
+        .viewfinder-br { position: absolute; bottom: 1.5rem; right: 1.5rem; width: 2rem; height: 2rem; border-bottom: 1.5px solid rgba(255,255,255,0.8); border-right: 1.5px solid rgba(255,255,255,0.8); border-bottom-right-radius: 4px; }
+    </style>
+</head>
+<body class="bg-sage-50 font-sans text-gray-800 min-h-screen relative overflow-hidden flex flex-col items-center justify-center selection:bg-yellow-200">
+
+    <!-- 1. Background Shadows (Lá cây hắt bóng) -->
+    <!-- Dùng 2 ảnh lá cây tách nền/trắng đen, set opacity thấp, mix-blend-multiply và blur để tạo cảm giác bóng râm chân thực -->
+    <!-- Bóng lá bên trái -->
+    <img src="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?auto=format&fit=crop&w=600&q=80" 
+         alt="Leaf Shadow" 
+         class="absolute -top-10 -left-32 w-[40rem] opacity-[0.07] mix-blend-multiply blur-[2px] pointer-events-none transform -rotate-12 grayscale">
+    
+    <!-- Bóng lá bên phải -->
+    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=600&q=80" 
+         alt="Leaf Shadow" 
+         class="absolute -bottom-20 -right-20 w-[45rem] opacity-[0.06] mix-blend-multiply blur-[3px] pointer-events-none transform rotate-12 grayscale">
+
+    <!-- Navbar giả lập (để giữ bố cục) -->
+    <header class="absolute top-0 w-full p-6 flex justify-between items-center z-10 max-w-6xl mx-auto left-0 right-0">
+        <div class="flex items-center gap-2 text-forest-900 cursor-pointer">
+            <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+            <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-yellow-500">Pedia</span></span>
+        </div>
+        <div class="hidden md:flex gap-6 text-sm font-medium text-gray-500">
+            <a href="#" class="text-forest-900">Trang chủ</a>
+            <a href="#" class="hover:text-forest-900 transition-colors">Tra cứu</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-4xl px-6 flex flex-col items-center mt-8">
+        
+        <!-- 2. Typography (Tiêu đề Serif & Phụ đề mỏng) -->
+        <div class="text-center mb-10">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-forest-900 mb-4 tracking-tight leading-tight">
+                Bạn đang nhìn thấy<br/>cây gì nhỉ?
+            </h1>
+            <p class="font-sans font-light text-gray-500 text-sm md:text-base max-w-md mx-auto leading-relaxed">
+                Chụp ảnh hoặc tải lên một chiếc lá để tìm hiểu tên gọi, đặc điểm và cách chăm sóc.
+            </p>
+        </div>
+
+        <!-- 3. Camera Frame (Glassmorphism) -->
+        <div class="relative w-full max-w-2xl aspect-[4/3] sm:aspect-[16/9] rounded-3xl 
+                    backdrop-blur-xl bg-gradient-to-br from-green-50/40 via-white/20 to-yellow-50/30 
+                    border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] 
+                    flex flex-col items-center justify-center 
+                    transition-transform duration-700 hover:scale-[1.01] group cursor-pointer">
+            
+            <!-- Viewfinder corners (4 góc ngắm) -->
+            <div class="viewfinder-tl transition-all duration-500 group-hover:scale-110 group-hover:border-white"></div>
+            <div class="viewfinder-tr transition-all duration-500 group-hover:scale-110 group-hover:border-white"></div>
+            <div class="viewfinder-bl transition-all duration-500 group-hover:scale-110 group-hover:border-white"></div>
+            <div class="viewfinder-br transition-all duration-500 group-hover:scale-110 group-hover:border-white"></div>
+
+            <!-- Inner content (Icon & Text tối giản) -->
+            <div class="flex flex-col items-center opacity-60 transition-opacity duration-300 group-hover:opacity-100">
+                <i data-feather="camera" class="w-10 h-10 text-forest-900 mb-3 stroke-[1.5]"></i>
+                <p class="text-forest-900 font-medium text-sm tracking-wide">Khung hình camera</p>
+                <p class="text-gray-500 font-light text-xs mt-1">Đưa cây vào giữa khung hình</p>
+            </div>
+            
+            <!-- Scan line effect giả lập (ẩn đi, có thể dùng JS kích hoạt) -->
+            <div class="absolute top-0 left-0 w-full h-[2px] bg-yellow-300 shadow-[0_0_10px_2px_rgba(253,224,71,0.5)] opacity-0"></div>
+        </div>
+
+        <!-- 4. Nút bấm (Call-to-Action Buttons) -->
+        <div class="flex flex-col sm:flex-row gap-4 mt-10 w-full sm:w-auto">
+            <!-- Nút Mở Camera (Forest Green) -->
+            <button class="flex items-center justify-center gap-2 px-8 py-3.5 bg-forest-900 text-white rounded-full font-semibold text-sm transition-all duration-300 hover:bg-[#132a18] hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto">
+                <i data-feather="camera" class="w-4 h-4 stroke-[2.5]"></i>
+                Mở camera
+            </button>
+            
+            <!-- Nút Tải Ảnh Lên (White + Soft Shadow) -->
+            <button class="flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-gray-700 rounded-full font-semibold text-sm shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:text-forest-900 w-full sm:w-auto">
+                <i data-feather="upload" class="w-4 h-4 stroke-[2.5]"></i>
+                Tải ảnh lên
+            </button>
+        </div>
+        
+        <!-- Hint nhỏ -->
+        <p class="mt-6 text-xs text-gray-400 font-light flex items-center gap-1">
+            <i data-feather="info" class="w-3 h-3"></i> Ảnh rõ nét, đủ sáng sẽ cho kết quả tốt hơn
+        </p>
+
+    </main>
+
+    <!-- Khởi tạo Icon -->
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử cá nhân - HerbaPedia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        sage: { 50: '#eef1e6' },
+                        forest: { 900: '#1b3b22' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-sage-50 font-sans text-gray-800 min-h-screen relative flex flex-col selection:bg-yellow-200" style="background-image: linear-gradient(rgba(238, 247, 235, 0.85), rgba(210, 235, 205, 0.9)), url('assets/images/background-forest.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+
+    <!-- Background Shadows -->
+    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&q=80" alt="Shadow" class="fixed -top-10 -left-32 w-[40rem] opacity-[0.05] mix-blend-multiply blur-[2px] pointer-events-none transform -rotate-12 grayscale z-0">
+    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=600&q=80" alt="Shadow" class="fixed -bottom-20 -right-20 w-[45rem] opacity-[0.04] mix-blend-multiply blur-[3px] pointer-events-none transform rotate-12 grayscale z-0">
+
+    <!-- Header / Navbar -->
+    <header id="navbar" class="sticky top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center backdrop-blur-md bg-white/40 border-b border-white/40 shadow-sm mt-2 rounded-full">
+            <a href="index.html" class="flex items-center gap-2 text-forest-900 cursor-pointer hover:opacity-80 transition">
+                <img src="assets/images/logo.png" alt="HerbaPedia Logo" class="w-8 h-8 object-contain">
+                <span class="text-xl font-bold tracking-wide font-sans">Herba<span class="text-yellow-500">Pedia</span></span>
+            </a>
+            <ul class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 items-center nav-links">
+                <li><a href="index.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Trang chủ</a></li>
+                <li><a href="search.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Tra cứu</a></li>
+                <li><a href="history.html" class="hover:text-forest-900 transition-colors border-b-2 border-transparent hover:border-yellow-400 pb-1">Cộng đồng</a></li>
+                
+                <!-- Navbar Auth (Dynamic via JS) -->
+                                <li class="relative group">
+                    <button class="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-full hover:shadow-sm transition-all focus:outline-none">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="w-7 h-7 rounded-full object-cover">
+                        <span class="font-bold text-[#0A2F1D] text-sm">Hi, Alex</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 text-gray-500 group-hover:rotate-180 transition-transform"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 transform origin-top-right scale-95 group-hover:scale-100">
+                        <div class="py-1">
+                            <a href="profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="user" class="w-4 h-4 text-gray-500"></i> Hồ sơ cá nhân
+                            </a>
+                            <a href="user-profile.html?author=Alex&avatar=https://i.pravatar.cc/150?u=a042581f4e29026704d" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="book-open" class="w-4 h-4 text-gray-500"></i> Blog cá nhân
+                            </a>
+                            <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover: transition-colors">
+                                <i data-feather="clock" class="w-4 h-4 text-gray-500"></i> Lịch sử cá nhân
+                            </a>
+                        </div>
+                        <div class="border-t border-gray-100 py-1">
+                            <button class="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors">
+                                <i data-feather="log-out" class="w-4 h-4"></i> Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-6xl mx-auto px-6 flex-1 flex flex-col mt-10 mb-16">
+        
+        <div class="mb-8">
+            <h1 class="font-serif text-3xl md:text-4xl font-bold text-forest-900 mb-2">Lịch sử tra cứu</h1>
+            <p class="font-sans font-light text-gray-500 text-sm">Xem lại các loài thực vật bạn đã quét bằng AI gần đây.</p>
+        </div>
+
+        <div class="bg-white/40 backdrop-blur-xl border border-white/80 shadow-[0_4px_32px_rgba(0,0,0,0.02)] rounded-3xl p-8 min-h-[400px]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- History Item 1 -->
+                <div class="bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-3xl p-4 flex flex-col gap-4 transition-transform hover:-translate-y-2 hover:shadow-xl group cursor-pointer relative overflow-hidden">
+                    <button class="absolute top-3 right-3 text-white hover:text-red-500 bg-black/20 hover:bg-white rounded-full p-2 transition-all opacity-0 group-hover:opacity-100 z-10">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                    <div class="overflow-hidden rounded-2xl w-full h-40 shrink-0">
+                        <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <h4 class="font-bold text-forest-900 text-lg mb-1 leading-tight">Lá Tía Tô</h4>
+                        <span class="inline-block bg-gradient-to-r from-forest-900 to-yellow-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-3 shadow-sm">AI: 96%</span>
+                        <div class="text-xs text-gray-500 font-light mt-auto flex items-center gap-1">
+                            <i data-feather="calendar" class="w-3.5 h-3.5"></i> Hôm nay
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Item 2 -->
+                <div class="bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-3xl p-4 flex flex-col gap-4 transition-transform hover:-translate-y-2 hover:shadow-xl group cursor-pointer relative overflow-hidden">
+                    <button class="absolute top-3 right-3 text-white hover:text-red-500 bg-black/20 hover:bg-white rounded-full p-2 transition-all opacity-0 group-hover:opacity-100 z-10">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                    <div class="overflow-hidden rounded-2xl w-full h-40 shrink-0 bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <h4 class="font-bold text-forest-900 text-lg mb-1 leading-tight">Ngải Cứu</h4>
+                        <span class="inline-block bg-gradient-to-r from-forest-900 to-yellow-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-3 shadow-sm">AI: 89%</span>
+                        <div class="text-xs text-gray-500 font-light mt-auto flex items-center gap-1">
+                            <i data-feather="calendar" class="w-3.5 h-3.5"></i> 2 ngày trước
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Item 3 -->
+                <div class="bg-white/80 backdrop-blur-md border border-white shadow-sm rounded-3xl p-4 flex flex-col gap-4 transition-transform hover:-translate-y-2 hover:shadow-xl group cursor-pointer relative overflow-hidden">
+                    <button class="absolute top-3 right-3 text-white hover:text-red-500 bg-black/20 hover:bg-white rounded-full p-2 transition-all opacity-0 group-hover:opacity-100 z-10">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                    <div class="overflow-hidden rounded-2xl w-full h-40 shrink-0">
+                        <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=300&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <h4 class="font-bold text-forest-900 text-lg mb-1 leading-tight">Lá Đinh Lăng</h4>
+                        <span class="inline-block bg-gradient-to-r from-forest-900 to-yellow-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full self-start mb-3 shadow-sm">AI: 92%</span>
+                        <div class="text-xs text-gray-500 font-light mt-auto flex items-center gap-1">
+                            <i data-feather="calendar" class="w-3.5 h-3.5"></i> Tuần trước
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load more button -->
+            <div class="flex justify-center mt-12">
+                <button class="px-8 py-2.5 rounded-full border border-gray-300 text-gray-600 text-sm font-semibold hover:border-forest-900 hover:text-forest-900 hover:bg-white shadow-sm transition-all flex items-center gap-2">
+                    Tải thêm lịch sử
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-6 text-gray-500 text-sm font-light mt-auto">
+        <p>&copy; 2026 HerbaPedia. Phát triển vì sức khỏe cộng đồng.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

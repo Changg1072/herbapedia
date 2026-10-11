@@ -1,0 +1,239 @@
+/* CSS Variables chung */
+:root {
+    --primary-green: #2e7d32; /* Xanh lá thảo mộc (Botanical Green) */
+    --light-green: #4caf50;
+    --lemon-yellow: #fafa33; /* Vàng chanh */
+    --bg-color: #fdfbf7; /* Trắng ngà / Be nhạt */
+    --text-dark: #1b2e1c;
+    --text-light: #ffffff;
+    --danger: #d32f2f;
+    --danger-bg: #ffebee;
+    
+    /* Frosted Glass Utilities */
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+    
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.1);
+    --border-radius: 16px;
+    --font-main: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Watermark lá cây 3-5% opacity, Parallax effect với fixed attachment */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='%232e7d32' fill-opacity='0.04' d='M 50 10 C 20 20, 10 50, 50 90 C 90 50, 80 20, 50 10 Z'/%3E%3C/svg%3E"),
+                      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Cpath fill='%232e7d32' fill-opacity='0.03' d='M10,90 C10,50 50,10 90,10 C50,10 10,50 10,90 Z'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: 120px 120px, 200px 200px;
+    background-position: 0 0, 50px 50px;
+}
+
+/* Navbar - Floating, Frosted Glass */
+.navbar-wrapper {
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+    padding: 0 1rem;
+}
+
+.navbar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 100px; /* Pill shape */
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: all 0.4s ease;
+}
+
+/* State when scrolled down */
+.navbar.scrolled {
+    background: rgba(46, 125, 50, 0.85); /* Xanh lá mờ */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-green);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.4s ease;
+}
+
+.navbar.scrolled .logo {
+    color: var(--text-light);
+}
+
+.logo span {
+    color: #cca300;
+}
+.navbar.scrolled .logo span {
+    color: var(--lemon-yellow);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.navbar.scrolled .nav-links a {
+    color: var(--text-light);
+}
+
+/* Hover hiệu ứng gạch chân vàng chanh */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--lemon-yellow);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+.navbar.scrolled .nav-links a:hover {
+    color: var(--lemon-yellow);
+}
+
+.btn-login {
+    background-color: var(--primary-green);
+    color: var(--text-light) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.3);
+}
+
+.btn-login::after {
+    display: none; /* No underline for button */
+}
+
+.navbar.scrolled .btn-login {
+    background-color: var(--text-light);
+    color: var(--primary-green) !important;
+}
+
+.navbar.scrolled .btn-login:hover {
+    background-color: var(--lemon-yellow);
+}
+
+.btn-login:hover {
+    background-color: var(--light-green);
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+/* Common Components */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 100px; /* Pill shape */
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--light-green);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.btn-accent {
+    background-color: var(--lemon-yellow);
+    color: var(--text-dark);
+}
+
+.btn-accent:hover {
+    filter: brightness(0.95);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+/* Frosted Glass Card Utility */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--glass-shadow);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+/* Toggle Switch Utilities */
+.toggle-switch { position: relative; display: inline-block; width: 46px; height: 24px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+.toggle-slider:before { position: absolute; content: ''; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+.toggle-switch input:checked + .toggle-slider { background-color: var(--lemon-yellow); box-shadow: 0 0 5px rgba(250, 250, 51, 0.5); }
+.toggle-switch input:checked + .toggle-slider:before { transform: translateX(22px); background-color: var(--primary-green); }
