@@ -1,0 +1,7 @@
+{
+    "msp_thresh": 0.9657078981399536,
+    "calibration_auroc": 0.8601822617680825,
+    "known_samples": 2144,
+    "unknown_samples": 13,
+    "method": "Youden_J"
+}

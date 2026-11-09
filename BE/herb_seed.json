@@ -921,5 +921,162 @@
       "Cách dùng: hãm 3-5 nụ hoa khô với 200ml nước nóng 85°C trong 5 phút.",
       "Liều: dùng 1-2 tách trà mỗi ngày."
     ]
+  },
+  {
+    "id": "bitter-gourd",
+    "datasetName": "Bitter Gourd",
+    "name": "Khổ qua (Mướp đắng)",
+    "scientific": "Momordica charantia L.",
+    "image": "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "thanh nhiệt",
+      "giải độc"
+    ],
+    "usage": "Quả và dây lá có vị đắng tính hàn, giúp thanh nhiệt, giải độc và làm mát cơ thể.",
+    "parts": "Quả, lá và dây khổ qua",
+    "identification": "Dây leo có tua cuốn, lá mọc so le xẻ thùy sâu 5-7 thùy, quả có nhiều u lồi sần sùi.",
+    "remedies": [
+      "Chế biến thành món ăn thanh mát hoặc pha trà khổ qua sấy khô lượng vừa phải."
+    ],
+    "safety": "Không lạm dụng nước ép khổ qua sống liều cao; phụ nữ mang thai và người huyết áp thấp cần thận trọng.",
+    "habitat": "Trồng phổ biến khắp các vùng nhiệt đới và cận nhiệt đới tại Việt Nam.",
+    "preparation": "Rửa sạch quả, bỏ ruột và hạt già trước khi nấu ăn hoặc thái lát phơi khô pha trà.",
+    "caution": "Người đang dùng thuốc hạ đường huyết cần tham khảo bác sĩ để tránh hạ đường huyết quá mức.",
+    "usageDetails": [
+      "Dạng dùng: quả tươi nấu chín làm thực phẩm hoặc lát quả khô pha trà loãng.",
+      "Cách dùng: xào, nấu canh hoặc hãm 3-5 lát khổ qua khô với nước sôi.",
+      "Liều: dùng vừa phải trong bữa ăn; không tự ý dùng thay thuốc điều trị đái tháo đường."
+    ]
+  },
+  {
+    "id": "centella-asiatica",
+    "datasetName": "Centella asiatica",
+    "name": "Rau má",
+    "scientific": "Centella asiatica (L.) Urb.",
+    "image": "https://images.unsplash.com/photo-1530968464165-7a1861cbaf9f?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "thanh nhiệt",
+      "giải độc",
+      "làm đẹp"
+    ],
+    "usage": "Thảo mộc thanh nhiệt, giải độc, làm mát gan và hỗ trợ phục hồi da.",
+    "parts": "Toàn cây (lá và thân bò)",
+    "identification": "Thân thảo mọc bò sát đất, lá hình thận hoặc tròn có khía tai bèo đều ở mép, cuống lá dài.",
+    "remedies": [
+      "Nước rau má tươi rửa sạch xay loãng hoặc canh rau má thanh nhiệt."
+    ],
+    "safety": "Rửa thật kỹ vì cây mọc sát đất dễ nhiễm ký sinh trùng; không uống quá nhiều liên tục nhiều tuần.",
+    "habitat": "Mọc tự nhiên và được trồng ở nơi đất ẩm, mát, bờ ruộng và vườn nhà.",
+    "preparation": "Nhặt sạch rễ bẩn, ngâm rửa kỹ dưới vòi nước sạch; ưu tiên nấu chín hoặc xay với nước đun sôi để nguội.",
+    "caution": "Người tỳ vị hư hàn, hay lạnh bụng tiêu chảy hoặc đang dùng thuốc gan cần hạn chế.",
+    "usageDetails": [
+      "Dạng dùng: rau tươi nấu canh, luộc hoặc xay nước uống thanh mát.",
+      "Cách dùng: dùng 20-30g rau má tươi đã rửa sạch mỗi lần, không nên pha quá nhiều đường.",
+      "Liều: dùng 2-3 lần/tuần như thực phẩm giải nhiệt, không uống thay nước lọc hàng ngày."
+    ]
+  },
+  {
+    "id": "grape",
+    "datasetName": "Grape",
+    "name": "Nho",
+    "scientific": "Vitis vinifera L.",
+    "image": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "thanh nhiệt",
+      "làm đẹp"
+    ],
+    "usage": "Quả giàu chất chống oxy hóa polyphenol, resveratrol; lá nho non dùng trong ẩm thực.",
+    "parts": "Quả chín, hạt nho chuẩn hóa và lá non",
+    "identification": "Dây leo thân gỗ có tua cuốn, lá to xẻ 3-5 thùy có răng cưa, quả mọc thành chùm mọng nước.",
+    "remedies": [
+      "Dùng quả nho chín rửa sạch như trái cây bổ sung vitamin và chất chống oxy hóa."
+    ],
+    "safety": "Rửa kỹ lớp phấn/thuốc bám ngoài vỏ quả; người tiểu đường cần kiểm soát lượng ăn vì nho nhiều đường tự nhiên.",
+    "habitat": "Trồng nhiều tại vùng nắng ấm khô ráo như Ninh Thuận, Bình Thuận.",
+    "preparation": "Ngâm rửa từng chùm dưới vòi nước chảy trước khi ăn tươi.",
+    "caution": "Trẻ nhỏ ăn nho nguyên quả dễ bị hóc, cần cắt đôi và bỏ hạt.",
+    "usageDetails": [
+      "Dạng dùng: quả chín ăn tươi hoặc chiết xuất hạt nho chuẩn hóa.",
+      "Cách dùng: ăn trực tiếp sau bữa ăn với khẩu phần hợp lý.",
+      "Liều: khoảng 100-150g quả chín mỗi lần."
+    ]
+  },
+  {
+    "id": "orange",
+    "datasetName": "Orange",
+    "name": "Cam",
+    "scientific": "Citrus × sinensis (L.) Osbeck",
+    "image": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "thanh nhiệt",
+      "tiêu hóa"
+    ],
+    "usage": "Quả giàu vitamin C tăng đề kháng; vỏ cam phơi khô (trần bì) hỗ trợ tiêu hóa, giảm đầy bụng.",
+    "parts": "Quả chín và vỏ quả phơi khô",
+    "identification": "Cây gỗ nhỏ thường xanh, cuống lá có cánh nhỏ đặc trưng, hoa trắng thơm, quả hình cầu màu cam.",
+    "remedies": [
+      "Nước cam tươi bổ sung vitamin C hoặc trà vỏ cam khô ấm bụng."
+    ],
+    "safety": "Không uống nước cam chua khi bụng đói hoặc ngay sau khi uống một số thuốc kháng sinh.",
+    "habitat": "Trồng phổ biến khắp các vùng trung du và đồng bằng Việt Nam.",
+    "preparation": "Rửa sạch quả trước khi vắt nước; vỏ cam chỉ dùng làm trà khi đảm bảo nguồn sạch hữu cơ.",
+    "caution": "Người viêm loét dạ dày - trào ngược nên hạn chế cam quá chua.",
+    "usageDetails": [
+      "Dạng dùng: múi/nước cam tươi hoặc vỏ cam sấy khô hãm trà.",
+      "Cách dùng: uống sau bữa ăn sáng hoặc trưa 30-60 phút.",
+      "Liều: 1 quả cam trung bình mỗi ngày, hạn chế thêm đường."
+    ]
+  },
+  {
+    "id": "snakeplant",
+    "datasetName": "Snakeplant",
+    "name": "Lưỡi hổ",
+    "scientific": "Dracaena trifasciata (Prain) Mabb.",
+    "image": "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "kháng viêm"
+    ],
+    "usage": "Cây cảnh thanh lọc không khí; dân gian đôi khi dùng ngoài da nhưng cây chứa saponin gây kích ứng khi nuốt.",
+    "parts": "Chủ yếu trồng làm cảnh; không tự dùng đường uống",
+    "identification": "Lá mọc thẳng từ gốc hình giáo cứng và mọng, mặt lá có vằn ngang xanh đậm nhạt, viền lá thường màu vàng.",
+    "remedies": [
+      "Trồng làm cây cảnh lọc không khí; không tự ý giã lá uống hoặc nhỏ vào tai/họng."
+    ],
+    "safety": "Lá chứa saponin có thể gây buồn nôn, rát miệng, tiêu chảy nếu ăn/uống phải; độc với chó mèo.",
+    "habitat": "Cây ưa sáng bán phần, chịu hạn rất tốt, trồng phổ biến trong nhà và sân vườn.",
+    "preparation": "Không tự chế biến làm thuốc uống tại nhà.",
+    "caution": "Để xa tầm tay trẻ nhỏ và thú cưng; tránh để nhựa lá dính vào mắt hoặc vết thương hở.",
+    "usageDetails": [
+      "Dạng dùng: cây cảnh sinh thái lọc không khí trong không gian sống.",
+      "Cách dùng: không tự ngậm hoặc uống nước ép lá lưỡi hổ khi chưa có chỉ định y khoa.",
+      "Liều: không có liều uống an toàn tại nhà."
+    ]
+  },
+  {
+    "id": "tea",
+    "datasetName": "Tea",
+    "name": "Trà xanh (Chè xanh)",
+    "scientific": "Camellia sinensis (L.) Kuntze",
+    "image": "https://images.unsplash.com/photo-1530968464165-7a1861cbaf9f?auto=format&fit=crop&w=900&q=80",
+    "tags": [
+      "thanh nhiệt",
+      "kháng viêm",
+      "giải độc"
+    ],
+    "usage": "Lá giàu catechin (EGCG) giúp tỉnh táo, chống oxy hóa, thanh nhiệt và dùng nấu nước tắm dân gian.",
+    "parts": "Búp và lá bánh tẻ",
+    "identification": "Cây bụi thường xanh, lá mọc so le hình bầu dục thuôn, dày bóng, mép lá có răng cưa nhỏ đều.",
+    "remedies": [
+      "Lá chè xanh tươi rửa sạch vò nhẹ, tráng nước đầu rồi hãm nước sôi 80-85°C."
+    ],
+    "safety": "Không uống trà xanh đặc khi bụng đói (gây cồn cào, say trà) hoặc sát giờ đi ngủ; tránh uống ngay sau bữa ăn giàu sắt.",
+    "habitat": "Trồng nhiều ở vùng đồi núi trung du như Thái Nguyên, Lâm Đồng, Phú Thọ.",
+    "preparation": "Chọn lá chè sạch không tồn dư thuốc sâu, rửa kỹ, vò nhẹ và hãm nước nóng vừa tới.",
+    "caution": "Người mất ngủ, thiếu máu thiếu sắt, phụ nữ mang thai nên hạn chế trà quá đặc.",
+    "usageDetails": [
+      "Dạng dùng: lá tươi hãm nước chè xanh hoặc búp trà sấy khô.",
+      "Cách dùng: hãm 5-10g lá chè tươi với 300-500ml nước nóng 80-85°C trong 5-7 phút.",
+      "Liều: uống 1-2 cốc trà loãng vào buổi sáng hoặc đầu giờ chiều."
+    ]
   }
 ]

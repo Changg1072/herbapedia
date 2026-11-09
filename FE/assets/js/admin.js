@@ -8,11 +8,13 @@
 
 const ADMIN_API = (window.HerbaConfig && window.HerbaConfig.API_BASE_URL) || window.API_BASE_URL || 'http://127.0.0.1:8000';
 
-// 20 Class thực tế được huấn luyện trong mô hình AI (MobileNetV3 / Custom CNN)
+// 26 Class thực tế được huấn luyện trong 3 mô hình AI (EfficientNet-B0 / MobileNetV3 / Custom CNN)
 const AI_RECOGNIZED_CLASSES = new Set([
     'aloe', 'aloevera', 'arabian-jasmine', 'jasmine', 'betel', 'bhrami', 'brahmi',
-    'coffee', 'eucalyptus', 'guava', 'hibiscus', 'jackfruit', 'lemon', 'mango',
-    'marigold', 'mint', 'neem', 'onion', 'papaya', 'pepper', 'rose', 'tomato', 'tulsi'
+    'bitter-gourd', 'bitter gourd', 'centella-asiatica', 'centella asiatica',
+    'coffee', 'eucalyptus', 'grape', 'guava', 'hibiscus', 'jackfruit', 'lemon', 'mango',
+    'marigold', 'mint', 'neem', 'onion', 'orange', 'papaya', 'pepper', 'rose',
+    'snakeplant', 'tea', 'tomato', 'tulsi'
 ]);
 
 function isAiHerb(herb) {

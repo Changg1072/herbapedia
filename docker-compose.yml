@@ -1,0 +1,53 @@
+services:
+  # 1. Cơ sở dữ liệu MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: herbapedia-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-herbapedia_db}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Backend FastAPI + AI Models
+  backend:
+    build:
+      context: ./BE
+      dockerfile: Dockerfile
+    container_name: herbapedia-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./BE:/app
+    env_file:
+      - ./BE/.env
+    environment:
+      DATABASE_URL: mysql+pymysql://root:123456@mysql:3306/herbapedia_db
+      CORS_ORIGINS: http://localhost:5500,http://127.0.0.1:5500,http://localhost:5173
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 3. Frontend Web Server (Nginx)
+  frontend:
+    build:
+      context: ./FE
+      dockerfile: Dockerfile
+    container_name: herbapedia-frontend
+    restart: unless-stopped
+    ports:
+      - "5500:80"
+    volumes:
+      - ./FE:/usr/share/nginx/html:ro
+
+volumes:
+  mysql_data:

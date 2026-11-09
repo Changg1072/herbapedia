@@ -137,40 +137,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Quản lý chọn mô hình AI (MobileNetV3 hoặc Custom CNN)
-    let selectedModel = localStorage.getItem('selectedModel') || 'mobilenet_v3';
-    const btnModelMobilenet = document.getElementById('btnModelMobilenet');
-    const btnModelCustomCnn = document.getElementById('btnModelCustomCnn');
+    // 4. Quản lý chọn mô hình AI (EfficientNet-B0, Custom CNN v2, MobileNetV3 hoặc Custom CNN v1)
+    const VALID_MODELS = ['efficientnet_b0', 'custom_cnn_v2', 'mobilenet_v3', 'custom_cnn'];
+    let selectedModel = localStorage.getItem('selectedModel') || 'efficientnet_b0';
+    if (!VALID_MODELS.includes(selectedModel)) {
+        selectedModel = 'efficientnet_b0';
+        localStorage.setItem('selectedModel', selectedModel);
+    }
+
+    const modelButtons = [
+        { id: 'efficientnet_b0', el: document.getElementById('btnModelEfficientnet') },
+        { id: 'custom_cnn_v2', el: document.getElementById('btnModelCustomCnnV2') },
+        { id: 'mobilenet_v3', el: document.getElementById('btnModelMobilenet') },
+        { id: 'custom_cnn', el: document.getElementById('btnModelCustomCnn') }
+    ];
 
     function updateModelButtons() {
-        if (btnModelMobilenet && btnModelCustomCnn) {
-            if (selectedModel === 'mobilenet_v3') {
-                btnModelMobilenet.className = 'px-4 py-1.5 rounded-full transition-all duration-200 bg-forest-900 text-white shadow-sm flex items-center gap-1.5';
-                btnModelCustomCnn.className = 'px-4 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5';
-            } else {
-                btnModelCustomCnn.className = 'px-4 py-1.5 rounded-full transition-all duration-200 bg-forest-900 text-white shadow-sm flex items-center gap-1.5';
-                btnModelMobilenet.className = 'px-4 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5';
+        modelButtons.forEach(({ id, el }) => {
+            if (!el) return;
+            const isActive = (selectedModel === id);
+            el.className = isActive
+                ? 'px-3.5 py-1.5 rounded-full transition-all duration-200 bg-forest-900 text-white shadow-sm flex items-center gap-1.5'
+                : 'px-3.5 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5';
+
+            const accBadge = el.querySelector('[data-model-acc]');
+            if (accBadge) {
+                accBadge.className = isActive
+                    ? 'text-[10px] px-1.5 py-0.2 bg-[#8CC63F] text-white rounded-full font-bold'
+                    : 'text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-full font-bold';
             }
-        }
+        });
+
         const modalModelRadio = document.querySelector(`input[name="modalModelChoice"][value="${selectedModel}"]`);
         if (modalModelRadio) modalModelRadio.checked = true;
     }
 
-    if (btnModelMobilenet) {
-        btnModelMobilenet.addEventListener('click', () => {
-            selectedModel = 'mobilenet_v3';
+    modelButtons.forEach(({ id, el }) => {
+        if (!el) return;
+        el.addEventListener('click', () => {
+            selectedModel = id;
             localStorage.setItem('selectedModel', selectedModel);
             updateModelButtons();
         });
-    }
+    });
 
-    if (btnModelCustomCnn) {
-        btnModelCustomCnn.addEventListener('click', () => {
-            selectedModel = 'custom_cnn';
-            localStorage.setItem('selectedModel', selectedModel);
-            updateModelButtons();
-        });
-    }
+    // Đồng bộ độ chính xác từng mô hình từ API /models của Backend (nếu có)
+    fetch(`${API_BASE_URL}/models`, { signal: AbortSignal.timeout(3000) })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+            if (!data || !Array.isArray(data.models)) return;
+            data.models.forEach(m => {
+                if (m.id && m.accuracy) {
+                    const badge = document.querySelector(`[data-model-acc="${m.id}"]`);
+                    if (badge) badge.textContent = m.accuracy;
+                }
+            });
+        })
+        .catch(() => {});
 
     updateModelButtons();
 
@@ -185,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sourceRadio = document.querySelector(`input[name="cameraSourceChoice"][value="${currentSource}"]`);
         if (sourceRadio) sourceRadio.checked = true;
 
-        const currentModel = localStorage.getItem('selectedModel') || 'mobilenet_v3';
+        const currentModel = localStorage.getItem('selectedModel') || 'efficientnet_b0';
         const modelRadio = document.querySelector(`input[name="modalModelChoice"][value="${currentModel}"]`);
         if (modelRadio) modelRadio.checked = true;
 
@@ -228,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleSaveSettings() {
         const chosenSource = document.querySelector('input[name="cameraSourceChoice"]:checked')?.value || 'webcam';
-        const chosenModel = document.querySelector('input[name="modalModelChoice"]:checked')?.value || 'mobilenet_v3';
+        const chosenModel = document.querySelector('input[name="modalModelChoice"]:checked')?.value || 'efficientnet_b0';
         const newRpiUrl = (inputRpiUrl ? inputRpiUrl.value : '').trim().replace(/\/+$/, '');
         const newConf = confidenceRange ? confidenceRange.value : '35';
         const newOptimize = checkOptimizeImage ? checkOptimizeImage.checked : true;

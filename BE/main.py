@@ -188,8 +188,8 @@ async def predict_leaf(
             detail=f"Lỗi khi nhận diện ảnh: {str(exc)}",
         ) from exc
 
-    # Đưa tác vụ upload Cloudinary và lưu lịch sử vào BackgroundTasks (không bắt người dùng đợi)
-    if current_user is not None:
+    # Đưa tác vụ upload Cloudinary và lưu lịch sử vào BackgroundTasks khi ảnh thuộc tập đã biết (KNOWN)
+    if current_user is not None and prediction_result.get("is_known", True):
         background_tasks.add_task(
             save_prediction_history_background,
             current_user.id,
@@ -199,8 +199,13 @@ async def predict_leaf(
         )
 
     response_data = {
+        "status": prediction_result.get("status", "KNOWN"),
+        "is_known": prediction_result.get("is_known", True),
+        "osr": prediction_result.get("osr"),
         "model_id": prediction_result["model_id"],
         "model_name": prediction_result["model_name"],
+        "model_accuracy": prediction_result.get("model_accuracy", ""),
+        "model_accuracy_value": prediction_result.get("model_accuracy_value", 0.0),
         "predicted_class": prediction_result["predicted_class"],
         "scientific_name": prediction_result["scientific_name"],
         "class_name": prediction_result["class_name"],

@@ -185,29 +185,37 @@
                 </div>
 
                 <!-- Video Element (Webcam Stream) -->
-                <video id="videoElement" autoplay playsinline class="absolute top-0 left-0 w-full h-full object-cover z-10" style="display: none;"></video>
+                <video id="videoElement" autoplay playsinline class="absolute top-0 left-0 w-full h-full object-contain bg-black/5 z-10" style="display: none;"></video>
                 
                 <!-- Image Preview (Uploaded file or Raspberry Pi MJPEG stream) -->
-                <img id="imagePreview" alt="Image Preview" class="absolute top-0 left-0 w-full h-full object-cover z-10" style="display: none;">
+                <img id="imagePreview" alt="Image Preview" class="absolute top-0 left-0 w-full h-full object-contain p-2 z-10" style="display: none;">
                 
                 <!-- Scan Laser Line Effect -->
                 <div id="scanLine" class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-yellow-300 via-green-400 to-yellow-300 shadow-[0_0_18px_6px_rgba(140,198,63,0.7)] z-30 animate-scan pointer-events-none" style="display: none;"></div>
             </div>
 
             <!-- Model Selector Bar -->
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5 bg-white/85 backdrop-blur-md px-4 py-2.5 rounded-full border border-gray-200/80 shadow-sm z-20">
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5 bg-white/85 backdrop-blur-md px-4 py-2.5 rounded-3xl sm:rounded-full border border-gray-200/80 shadow-sm z-20">
                 <div class="flex items-center gap-1.5 text-forest-900 font-bold text-xs">
                     <i data-feather="cpu" class="w-4 h-4 text-[#8CC63F]"></i>
                     <span>Mô hình AI:</span>
                 </div>
-                <div class="inline-flex p-1 bg-gray-100/90 rounded-full text-xs font-semibold" id="modelSelectorGroup">
-                    <button type="button" id="btnModelMobilenet" class="px-4 py-1.5 rounded-full transition-all duration-200 bg-forest-900 text-white shadow-sm flex items-center gap-1.5">
-                        <span>MobileNetV3</span>
-                        <span class="text-[10px] px-1.5 py-0.2 bg-[#8CC63F] text-white rounded-full font-bold">95.6%</span>
+                <div class="inline-flex flex-wrap justify-center gap-1 p-1 bg-gray-100/90 rounded-2xl sm:rounded-full text-xs font-semibold" id="modelSelectorGroup">
+                    <button type="button" id="btnModelEfficientnet" data-model-id="efficientnet_b0" class="px-3.5 py-1.5 rounded-full transition-all duration-200 bg-forest-900 text-white shadow-sm flex items-center gap-1.5">
+                        <span>EfficientNet-B0</span>
+                        <span data-model-acc="efficientnet_b0" class="text-[10px] px-1.5 py-0.2 bg-[#8CC63F] text-white rounded-full font-bold">96.8%</span>
                     </button>
-                    <button type="button" id="btnModelCustomCnn" class="px-4 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5">
-                        <span>Custom CNN</span>
-                        <span class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-full font-bold">88.4%</span>
+                    <button type="button" id="btnModelCustomCnnV2" data-model-id="custom_cnn_v2" class="px-3.5 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5">
+                        <span>Custom CNN v2</span>
+                        <span data-model-acc="custom_cnn_v2" class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-full font-bold">91.4%</span>
+                    </button>
+                    <button type="button" id="btnModelMobilenet" data-model-id="mobilenet_v3" class="px-3.5 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5">
+                        <span>MobileNetV3</span>
+                        <span data-model-acc="mobilenet_v3" class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-full font-bold">95.6%</span>
+                    </button>
+                    <button type="button" id="btnModelCustomCnn" data-model-id="custom_cnn" class="px-3.5 py-1.5 rounded-full transition-all duration-200 text-gray-600 hover:text-forest-900 flex items-center gap-1.5">
+                        <span>Custom CNN v1</span>
+                        <span data-model-acc="custom_cnn" class="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-full font-bold">88.4%</span>
                     </button>
                 </div>
             </div>
@@ -262,14 +270,14 @@
         <section class="w-full mt-20 pt-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 <div class="bg-white/80 backdrop-blur-md rounded-2xl border border-white/80 p-5 shadow-sm text-center hover:-translate-y-1 transition-all">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-forest-900 font-serif">20+</div>
-                    <div class="text-xs sm:text-sm font-semibold text-gray-600 mt-1">Cây dược liệu chuẩn hóa</div>
-                    <div class="text-[11px] text-gray-400 font-light mt-0.5">Dữ liệu thực vật Việt Nam</div>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-forest-900 font-serif">26+</div>
+                    <div class="text-xs sm:text-sm font-semibold text-gray-600 mt-1">Cây dược liệu AI nhận diện</div>
+                    <div class="text-[11px] text-gray-400 font-light mt-0.5">42+ loài trong từ điển số</div>
                 </div>
                 <div class="bg-white/80 backdrop-blur-md rounded-2xl border border-white/80 p-5 shadow-sm text-center hover:-translate-y-1 transition-all">
-                    <div class="text-3xl sm:text-4xl font-extrabold text-[#8CC63F] font-serif">95.6%</div>
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[#8CC63F] font-serif">96.8%</div>
                     <div class="text-xs sm:text-sm font-semibold text-gray-600 mt-1">Độ chính xác nhận diện</div>
-                    <div class="text-[11px] text-gray-400 font-light mt-0.5">MobileNetV3 (Top-3 đạt 99.3%)</div>
+                    <div class="text-[11px] text-gray-400 font-light mt-0.5">EfficientNet-B0 &amp; MobileNetV3</div>
                 </div>
                 <div class="bg-white/80 backdrop-blur-md rounded-2xl border border-white/80 p-5 shadow-sm text-center hover:-translate-y-1 transition-all">
                     <div class="text-3xl sm:text-4xl font-extrabold text-forest-900 font-serif">&lt; 80ms</div>
@@ -393,7 +401,7 @@
                     </div>
                     <h3 class="font-bold text-forest-900 text-base mb-1.5">Kiến trúc AI Đa mô hình</h3>
                     <p class="text-xs text-gray-500 leading-relaxed font-light">
-                        So sánh đối chứng trực quan giữa MobileNetV3 (Fine-tuning) đạt 94.4% và Custom CNN huấn luyện từ đầu.
+                        So sánh đối chứng trực quan giữa 4 mô hình: EfficientNet-B0 (96.8%), Custom CNN v2 (91.4%), MobileNetV3 (95.6%) và Custom CNN v1 (88.4%).
                     </p>
                 </div>
 
@@ -496,10 +504,10 @@
             <div>
                 <h4 class="text-xs font-bold uppercase tracking-wider text-forest-900 mb-3">Công nghệ Lõi</h4>
                 <ul class="text-xs space-y-2 text-gray-600">
-                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> MobileNetV3 Transfer Learning</li>
-                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> Custom CNN Deep Network</li>
-                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> FastAPI High Performance BE</li>
-                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> Raspberry Pi Embedded Camera</li>
+                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> EfficientNet-B0 Model 1 (96.8%)</li>
+                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> Custom CNN v2 Model 2 (91.4%)</li>
+                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> MobileNetV3 &amp; Custom CNN v1</li>
+                    <li class="flex items-center gap-1.5"><i data-feather="check" class="w-3 h-3 text-[#8CC63F]"></i> FastAPI &amp; Raspberry Pi Camera</li>
                 </ul>
             </div>
 
@@ -567,19 +575,45 @@
                         <i data-feather="cpu" class="w-4 h-4 text-[#8CC63F]"></i>
                         <span>Mô hình AI nhận diện</span>
                     </label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                    <div class="grid grid-cols-1 gap-2 mt-1">
                         <label class="flex items-start gap-2.5 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-[#8CC63F] transition-all text-xs text-gray-700 has-[:checked]:border-[#8CC63F] has-[:checked]:bg-green-50/40 has-[:checked]:shadow-sm">
-                            <input type="radio" name="modalModelChoice" value="mobilenet_v3" checked class="accent-[#8CC63F] mt-0.5">
-                            <div>
-                                <span class="font-bold text-forest-900 block">MobileNetV3</span>
-                                <span class="text-[11px] text-gray-500">Khuyên dùng • 95.6% chính xác • Tốc độ cao</span>
+                            <input type="radio" name="modalModelChoice" value="efficientnet_b0" checked class="accent-[#8CC63F] mt-0.5">
+                            <div class="flex-1 flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="font-bold text-forest-900 block">EfficientNet-B0 (Model 1 - PyTorch OSR)</span>
+                                    <span class="text-[11px] text-gray-500">17 loài dược liệu • CLAHE + Prototype Open-Set</span>
+                                </div>
+                                <span class="text-[11px] px-2 py-0.5 rounded-full bg-[#8CC63F]/15 text-forest-900 font-bold shrink-0">96.8%</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start gap-2.5 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-[#8CC63F] transition-all text-xs text-gray-700 has-[:checked]:border-[#8CC63F] has-[:checked]:bg-green-50/40 has-[:checked]:shadow-sm">
+                            <input type="radio" name="modalModelChoice" value="custom_cnn_v2" class="accent-[#8CC63F] mt-0.5">
+                            <div class="flex-1 flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="font-bold text-forest-900 block">Custom CNN v2 (Model 2 - PyTorch OSR)</span>
+                                    <span class="text-[11px] text-gray-500">17 loài dược liệu • 5-Block CNN + CLAHE + MSP OSR</span>
+                                </div>
+                                <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold shrink-0">91.4%</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start gap-2.5 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-[#8CC63F] transition-all text-xs text-gray-700 has-[:checked]:border-[#8CC63F] has-[:checked]:bg-green-50/40 has-[:checked]:shadow-sm">
+                            <input type="radio" name="modalModelChoice" value="mobilenet_v3" class="accent-[#8CC63F] mt-0.5">
+                            <div class="flex-1 flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="font-bold text-forest-900 block">MobileNetV3 (Fine-tuning)</span>
+                                    <span class="text-[11px] text-gray-500">20 loài dược liệu • Tốc độ suy luận nhanh</span>
+                                </div>
+                                <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold shrink-0">95.6%</span>
                             </div>
                         </label>
                         <label class="flex items-start gap-2.5 p-3 rounded-xl border border-gray-200 bg-white cursor-pointer hover:border-[#8CC63F] transition-all text-xs text-gray-700 has-[:checked]:border-[#8CC63F] has-[:checked]:bg-green-50/40 has-[:checked]:shadow-sm">
                             <input type="radio" name="modalModelChoice" value="custom_cnn" class="accent-[#8CC63F] mt-0.5">
-                            <div>
-                                <span class="font-bold text-forest-900 block">Custom CNN</span>
-                                <span class="text-[11px] text-gray-500">From Scratch • 88.4% chính xác • Thử nghiệm</span>
+                            <div class="flex-1 flex items-center justify-between gap-2">
+                                <div>
+                                    <span class="font-bold text-forest-900 block">Custom CNN v1 (From Scratch)</span>
+                                    <span class="text-[11px] text-gray-500">20 loài dược liệu • Mạng CNN 5 khối phiên bản 1</span>
+                                </div>
+                                <span class="text-[11px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-bold shrink-0">88.4%</span>
                             </div>
                         </label>
                     </div>

@@ -1,0 +1,5 @@
+{
+    "msp_thresh": 0.95,
+    "cos_thresh": 0.6499,
+    "dist_z_thresh": 2.0
+}

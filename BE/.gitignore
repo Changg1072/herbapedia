@@ -43,6 +43,8 @@ models/*.pt
 models/*.keras
 !models/best_leaf_model.keras
 !models/mobilenet_leaf_model.keras
+!models/Model1/leafai_model1_best.pth
+!models/Model2/leafai_model2_best.pth
 
 # Logs & Temporary Files
 *.log

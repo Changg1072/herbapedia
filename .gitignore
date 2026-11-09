@@ -77,9 +77,11 @@ BE/models/*.h5
 BE/models/*.pth
 BE/models/*.pt
 BE/models/*.keras
-# Cho phép 2 file mô hình của dự án (< 100MB) được đẩy lên Git:
+# Cho phép các file mô hình của dự án (< 100MB) được đẩy lên Git:
 !BE/models/best_leaf_model.keras
 !BE/models/mobilenet_leaf_model.keras
+!BE/models/Model1/leafai_model1_best.pth
+!BE/models/Model2/leafai_model2_best.pth
 
 # --- Logs, Temporary & Debug Files ---
 *.log
